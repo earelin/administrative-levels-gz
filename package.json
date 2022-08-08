@@ -11,5 +11,8 @@
   },
   "bin": {
     "nomenclator-extract": "./src/index.js"
+  },
+  "dependencies": {
+    "csv-parser": "^3.0.0"
   }
 }
