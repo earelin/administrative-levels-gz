@@ -8,7 +8,9 @@ class Divisions {
   }
 
   add(province) {
-    this.provinces.set(province.id, province);
+    if (!this.has(province)) {
+      this.provinces.set(province.id, province);
+    }
   }
 
   toArray() {
