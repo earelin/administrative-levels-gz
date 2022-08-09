@@ -1,10 +1,10 @@
 const csvParser = require('csv-parser');
-const {Province, Divisions} = require('./divisions');
+const {Province, DivisionsAggregator} = require('./divisionsAggregator');
 const fs = require('fs');
 const {capitalizeWords, undoCommaSplit} = require('./string-utils');
 
 async function nomenclatorParse(file) {
-  const divisions = new Divisions();
+  const divisions = new DivisionsAggregator();
 
   const csvReader = fs.createReadStream(file)
     .pipe(csvParser({separator: ';'}));

@@ -1,4 +1,4 @@
-const {Province, Divisions} = require('../src/divisions');
+const {Province, DivisionsAggregator} = require('../src/divisionsAggregator');
 
 describe('Political divisions', () => {
 
@@ -7,7 +7,7 @@ describe('Political divisions', () => {
 
   describe('Aggregator', () => {
     test('Should add province', () => {
-      const divisions = new Divisions();
+      const divisions = new DivisionsAggregator();
       const province = new Province(PROVINCE_ID, PROVINCE_NAME);
 
       divisions.add(province);
@@ -17,7 +17,7 @@ describe('Political divisions', () => {
     });
 
     test('Should detect not existent province', () => {
-      const divisions = new Divisions();
+      const divisions = new DivisionsAggregator();
       const province = new Province(PROVINCE_ID, PROVINCE_NAME);
 
       expect(divisions.has(province))
@@ -25,7 +25,7 @@ describe('Political divisions', () => {
     });
 
     test('Should return array of divisions', () => {
-      const divisions = new Divisions();
+      const divisions = new DivisionsAggregator();
       const province = new Province(PROVINCE_ID, PROVINCE_NAME);
 
       divisions.add(province);
@@ -39,7 +39,6 @@ describe('Political divisions', () => {
   });
 
   describe('Province', () => {
-
 
     test('Should set properties on creation', () => {
       const province = new Province(PROVINCE_ID, PROVINCE_NAME);

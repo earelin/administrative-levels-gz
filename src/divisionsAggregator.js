@@ -1,4 +1,4 @@
-class Divisions {
+class DivisionsAggregator {
   constructor() {
     this.provinces = new Map();
   }
@@ -26,6 +26,6 @@ class Province {
 }
 
 module.exports = {
-  Divisions,
+  DivisionsAggregator,
   Province
 };
