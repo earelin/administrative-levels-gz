@@ -3,13 +3,13 @@ class AdminLevelAggregator {
     this.subLevels = new Map();
   }
 
-  has(province) {
-    return this.subLevels.has(province.id);
+  hasSubLevel(adminLevel) {
+    return this.subLevels.has(adminLevel.id);
   }
 
-  add(province) {
-    if (!this.has(province)) {
-      this.subLevels.set(province.id, province);
+  addSubLevel(adminLevel) {
+    if (!this.hasSubLevel(adminLevel)) {
+      this.subLevels.set(adminLevel.id, adminLevel);
     }
   }
 

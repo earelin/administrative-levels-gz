@@ -11,7 +11,7 @@ async function nomenclatorParse(file) {
 
   for await (const data of csvReader) {
     const province = new AdminLevel(data['CD PROVINCIA'], parsePlaceName(data['NOME PROVINCIA']));
-    divisions.add(province);
+    divisions.addSubLevel(province);
   }
 
   return divisions;

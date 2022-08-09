@@ -10,9 +10,9 @@ describe('Political divisions', () => {
       const divisions = new AdminLevelAggregator();
       const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
 
-      divisions.add(province);
+      divisions.addSubLevel(province);
 
-      expect(divisions.has(province))
+      expect(divisions.hasSubLevel(province))
         .toBe(true);
     });
 
@@ -20,7 +20,7 @@ describe('Political divisions', () => {
       const divisions = new AdminLevelAggregator();
       const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
 
-      expect(divisions.has(province))
+      expect(divisions.hasSubLevel(province))
         .toBe(false);
     });
 
@@ -28,7 +28,7 @@ describe('Political divisions', () => {
       const divisions = new AdminLevelAggregator();
       const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
 
-      divisions.add(province);
+      divisions.addSubLevel(province);
 
       expect(divisions.toArray())
         .toEqual([{
