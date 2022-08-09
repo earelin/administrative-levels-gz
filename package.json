@@ -4,7 +4,8 @@
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "extract": "node ."
   },
   "devDependencies": {
     "jest": "^28.1.3"
