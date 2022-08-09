@@ -27,15 +27,32 @@ describe('Political divisions', () => {
     test('Should return array of levels', () => {
       const divisions = new AdminLevelAggregator();
       const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
-
       divisions.addSubLevel(province);
 
       expect(divisions.toJSON())
         .toEqual([{
           id: PROVINCE_ID,
-          name: PROVINCE_NAME
+          name: PROVINCE_NAME,
+          subLevels: []
         }]);
     });
+
+    test('Should return an empty array of levels', () => {
+      const divisions = new AdminLevelAggregator();
+
+      expect(divisions.toJSON())
+        .toEqual([]);
+    });
+
+    test('Should find a sublevel by id', () => {
+      const divisions = new AdminLevelAggregator();
+      const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
+
+      divisions.addSubLevel(province);
+
+      expect(divisions.findSubLevelById(province.id))
+        .toBe(province);
+    })
   });
 
   describe('Administrative Level', () => {

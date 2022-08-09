@@ -14,14 +14,28 @@ class AdminLevelAggregator {
   }
 
   toJSON() {
-    return Array.from(this.subLevels.values());
+    return Array.from(this.subLevels.values())
+      .map(subLevel => subLevel.toJSON());
+  }
+
+  findSubLevelById(id) {
+    return this.subLevels.get(id);
   }
 }
 
-class AdminLevel {
+class AdminLevel extends AdminLevelAggregator {
   constructor(id, name) {
+    super();
     this.id = id;
     this.name = name;
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      name: this.name,
+      subLevels: super.toJSON()
+    };
   }
 }
 
