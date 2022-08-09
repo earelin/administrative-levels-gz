@@ -1,4 +1,4 @@
-const {capitalize} = require('../src/string-utils');
+const {capitalizeWords} = require('../src/string-utils');
 
 describe('String utils', () => {
   describe('Capitalize words', () => {
@@ -6,10 +6,12 @@ describe('String utils', () => {
       ['CORUÑA, A', 'Coruña, A'],
       ['LUGO', 'Lugo']
     ])('Capitalize %i: %i', (input, expected) => {
-      expect(capitalize(input))
+      expect(capitalizeWords(input))
         .toEqual(expected);
     });
   });
 
-  describe()
+  describe('Undo comma separation', () => {
+
+  })
 });

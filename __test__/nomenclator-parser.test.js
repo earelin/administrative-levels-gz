@@ -7,7 +7,7 @@ describe('Nomenclator parser', () => {
     expect(divisions.toArray())
       .toEqual([{
         id: '15',
-        name: 'A Coruña'
+        name: 'Coruña, A'
       }, {
         id: '27',
         name: 'Lugo'

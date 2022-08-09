@@ -8,5 +8,5 @@ function capitalizeWords(string) {
 }
 
 module.exports = {
-  capitalize: capitalizeWords
+  capitalizeWords
 };
