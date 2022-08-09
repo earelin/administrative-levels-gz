@@ -1,4 +1,4 @@
-const nomenclatorParser = require('./nomenclator-parser');
+const nomenclatorParser = require('./parser');
 const fileName = process.argv[2];
 
 if (!fileName) {

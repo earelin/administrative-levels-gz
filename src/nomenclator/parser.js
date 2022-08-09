@@ -1,7 +1,7 @@
 const csvParser = require('csv-parser');
-const {AdminLevel, AdminLevelAggregator} = require('./admin-levels');
+const {AdminLevel, AdminLevelAggregator} = require('../admin-levels');
 const fs = require('fs');
-const {capitalizeWords, undoCommaSplit} = require('./string-utils');
+const {capitalizeWords, undoCommaSplit} = require('../string-utils');
 
 async function nomenclatorParse(file) {
   const divisions = new AdminLevelAggregator();

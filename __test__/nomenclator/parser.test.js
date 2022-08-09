@@ -1,4 +1,4 @@
-const nomenclatorParser = require('../src/nomenclator-parser');
+const nomenclatorParser = require('../../src/nomenclator/parser');
 
 describe('Nomenclator parser', () => {
   test('Should extract provinces', async () => {
