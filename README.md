@@ -1,6 +1,6 @@
-# Nomenclator extractor
+# Galiza Adminstrative Levels
 
-Extracts administrative levels from the *Xunta de Galicia* nomenclator.
+Service with galician's administrative levels.
 
 ## Install
 
@@ -12,8 +12,16 @@ yarn install
 
 ## Usage
 
-Extract administrative division
+### Extract data
+
+Extract administrative division form nomenclator
 
 ```shell
-yarn --silent extract path/to/file.csv
+yarn --silent nomenclator-extract path/to/nomenclator-file.csv
+```
+
+Extract administrative division form nomenclator
+
+```shell
+yarn --silent shapefiles-extract --provincias path/to/provincias_shapefiles
 ```
