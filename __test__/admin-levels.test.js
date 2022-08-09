@@ -1,4 +1,4 @@
-const {Province, AdminLevelAggregator} = require('../src/levelAggregator');
+const {AdminLevel, AdminLevelAggregator} = require('../src/admin-levels');
 
 describe('Political divisions', () => {
 
@@ -6,9 +6,9 @@ describe('Political divisions', () => {
   const PROVINCE_NAME = 'A Coruña';
 
   describe('Aggregator', () => {
-    test('Should add province', () => {
+    test('Should add level', () => {
       const divisions = new AdminLevelAggregator();
-      const province = new Province(PROVINCE_ID, PROVINCE_NAME);
+      const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
 
       divisions.add(province);
 
@@ -16,17 +16,17 @@ describe('Political divisions', () => {
         .toBe(true);
     });
 
-    test('Should detect not existent province', () => {
+    test('Should detect not existent level', () => {
       const divisions = new AdminLevelAggregator();
-      const province = new Province(PROVINCE_ID, PROVINCE_NAME);
+      const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
 
       expect(divisions.has(province))
         .toBe(false);
     });
 
-    test('Should return array of divisions', () => {
+    test('Should return array of levels', () => {
       const divisions = new AdminLevelAggregator();
-      const province = new Province(PROVINCE_ID, PROVINCE_NAME);
+      const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
 
       divisions.add(province);
 
@@ -38,10 +38,10 @@ describe('Political divisions', () => {
     });
   });
 
-  describe('Province', () => {
+  describe('Administrative Level', () => {
 
     test('Should set properties on creation', () => {
-      const province = new Province(PROVINCE_ID, PROVINCE_NAME);
+      const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
 
       expect(province.id)
         .toBe(PROVINCE_ID);

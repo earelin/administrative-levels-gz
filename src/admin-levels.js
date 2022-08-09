@@ -18,7 +18,7 @@ class AdminLevelAggregator {
   }
 }
 
-class Province {
+class AdminLevel {
   constructor(id, name) {
     this.id = id;
     this.name = name;
@@ -26,6 +26,6 @@ class Province {
 }
 
 module.exports = {
-  AdminLevelAggregator: AdminLevelAggregator,
-  Province
+  AdminLevelAggregator,
+  AdminLevel
 };
