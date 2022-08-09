@@ -10,15 +10,16 @@ async function nomenclatorParse(file) {
     .pipe(csvParser({separator: ';'}));
 
   for await (const data of csvReader) {
-    const province = addLevelToParent(divisions, data['CD PROVINCIA'], parsePlaceName(data['NOME PROVINCIA']));
-    addLevelToParent(province, data['CD CONCELLO'], parsePlaceName(data['NOME CONCELLO']));
+    const province = addLevelToParent(divisions, data['CD PROVINCIA'], data['NOME PROVINCIA']);
+    const council = addLevelToParent(province, data['CD CONCELLO'], data['NOME CONCELLO']);
+    addLevelToParent(council, data['CD PARROQUIA'], data['NOME PARROQUIA']);
   }
 
   return divisions;
 }
 
 function addLevelToParent(parent, id, name) {
-  let level = new AdminLevel(id, name);
+  let level = new AdminLevel(id, parsePlaceName(name));
   if (parent.hasSubLevel(level)) {
     level = parent.findSubLevelById(level.id);
   } else {

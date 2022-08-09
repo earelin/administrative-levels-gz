@@ -4,7 +4,8 @@ describe('String utils', () => {
   describe('Capitalize words', () => {
     test.each([
       ['CORUÑA, A', 'Coruña, A'],
-      ['LUGO', 'Lugo']
+      ['LUGO', 'Lugo'],
+      ['Cabanas (San Xián)', 'Cabanas (San Xián)']
     ])('Capitalize %s: %s', (input, expected) => {
       expect(capitalizeWords(input))
         .toEqual(expected);

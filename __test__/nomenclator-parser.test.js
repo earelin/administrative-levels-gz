@@ -11,11 +11,23 @@ describe('Nomenclator parser', () => {
         subLevels: [{
           id: '15001',
           name: 'Abegondo',
-          subLevels: []
-        },{
+          subLevels: [{
+            id: '1500102',
+            name: 'Cabanas (San Xián)',
+            subLevels: []
+          }, {
+            id: '1500109',
+            name: 'Leiro (Santaia)',
+            subLevels: []
+          }]
+        }, {
           id: '15003',
           name: 'Aranga',
-          subLevels: []
+          subLevels: [{
+            id: '1500301',
+            name: 'Aranga (San Paio)',
+            subLevels: []
+          }]
         }]
       }, {
         id: '27',
@@ -23,7 +35,11 @@ describe('Nomenclator parser', () => {
         subLevels: [{
           id: '27010',
           name: 'Castro De Rei',
-          subLevels: []
+          subLevels: [{
+            id: '2701008',
+            name: 'Duancos (Santa María)',
+            subLevels: []
+          }]
         }]
       }, {
         id: '32',
@@ -31,7 +47,11 @@ describe('Nomenclator parser', () => {
         subLevels: [{
           id: '32026',
           name: 'Coles',
-          subLevels: []
+          subLevels: [{
+            id: '3202603',
+            name: 'A Barra (Santa María)',
+            subLevels: []
+          }]
         }]
       }]);
   });
