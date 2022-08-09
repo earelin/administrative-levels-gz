@@ -12,7 +12,8 @@ async function nomenclatorParse(file) {
   for await (const data of csvReader) {
     const province = addLevelToParent(divisions, data['CD PROVINCIA'], data['NOME PROVINCIA']);
     const council = addLevelToParent(province, data['CD CONCELLO'], data['NOME CONCELLO']);
-    addLevelToParent(council, data['CD PARROQUIA'], data['NOME PARROQUIA']);
+    const parish = addLevelToParent(council, data['CD PARROQUIA'], data['NOME PARROQUIA']);
+    addLevelToParent(parish, data['CD LUGAR'], data['NOME LUGAR']);
   }
 
   return divisions;
