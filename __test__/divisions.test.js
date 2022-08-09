@@ -1,4 +1,4 @@
-const {Province, DivisionsAggregator} = require('../src/divisionsAggregator');
+const {Province, AdminLevelAggregator} = require('../src/levelAggregator');
 
 describe('Political divisions', () => {
 
@@ -7,7 +7,7 @@ describe('Political divisions', () => {
 
   describe('Aggregator', () => {
     test('Should add province', () => {
-      const divisions = new DivisionsAggregator();
+      const divisions = new AdminLevelAggregator();
       const province = new Province(PROVINCE_ID, PROVINCE_NAME);
 
       divisions.add(province);
@@ -17,7 +17,7 @@ describe('Political divisions', () => {
     });
 
     test('Should detect not existent province', () => {
-      const divisions = new DivisionsAggregator();
+      const divisions = new AdminLevelAggregator();
       const province = new Province(PROVINCE_ID, PROVINCE_NAME);
 
       expect(divisions.has(province))
@@ -25,7 +25,7 @@ describe('Political divisions', () => {
     });
 
     test('Should return array of divisions', () => {
-      const divisions = new DivisionsAggregator();
+      const divisions = new AdminLevelAggregator();
       const province = new Province(PROVINCE_ID, PROVINCE_NAME);
 
       divisions.add(province);

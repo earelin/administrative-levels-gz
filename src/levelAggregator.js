@@ -1,20 +1,20 @@
-class DivisionsAggregator {
+class AdminLevelAggregator {
   constructor() {
-    this.provinces = new Map();
+    this.subLevels = new Map();
   }
 
   has(province) {
-    return this.provinces.has(province.id);
+    return this.subLevels.has(province.id);
   }
 
   add(province) {
     if (!this.has(province)) {
-      this.provinces.set(province.id, province);
+      this.subLevels.set(province.id, province);
     }
   }
 
   toArray() {
-    return Array.from(this.provinces.values());
+    return Array.from(this.subLevels.values());
   }
 }
 
@@ -26,6 +26,6 @@ class Province {
 }
 
 module.exports = {
-  DivisionsAggregator,
+  AdminLevelAggregator: AdminLevelAggregator,
   Province
 };
