@@ -22,16 +22,6 @@ function capitalize(string) {
   return string;
 }
 
-function findFirstAlpha(string) {
-  for (let i = 0; i < string.length; i++) {
-    const character = string.charAt(i);
-    if (character.toLowerCase() !== character.toUpperCase()) {
-      return i;
-    }
-  }
-  return false;
-}
-
 function undoCommaSplit(string) {
   if (string.includes(',')) {
     const splitCommaString = string.split(',');
