@@ -13,7 +13,7 @@ class AdminLevelAggregator {
     }
   }
 
-  toArray() {
+  toJSON() {
     return Array.from(this.subLevels.values());
   }
 }

@@ -4,7 +4,7 @@ describe('Nomenclator parser', () => {
   test('Should extract provinces', async () => {
     const divisions = await nomenclatorParser('./__test__/data/data.csv');
 
-    expect(divisions.toArray())
+    expect(divisions.toJSON())
       .toEqual([{
         id: '15',
         name: 'A Coruña'

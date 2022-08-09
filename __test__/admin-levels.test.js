@@ -30,7 +30,7 @@ describe('Political divisions', () => {
 
       divisions.addSubLevel(province);
 
-      expect(divisions.toArray())
+      expect(divisions.toJSON())
         .toEqual([{
           id: PROVINCE_ID,
           name: PROVINCE_NAME

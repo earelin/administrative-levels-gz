@@ -7,4 +7,4 @@ if (!fileName) {
 }
 
 nomenclatorParser(process.argv[2])
-  .then(divisions => console.log(JSON.stringify(divisions.toArray())));
+  .then(divisions => console.log(JSON.stringify(divisions)));
