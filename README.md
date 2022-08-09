@@ -1,6 +1,6 @@
 # Nomenclator extractor
 
-Extracts administrative divisions from the Xunta de Galicia nomenclator.
+Extracts administrative levels from the *Xunta de Galicia* nomenclator.
 
 ## Install
 
