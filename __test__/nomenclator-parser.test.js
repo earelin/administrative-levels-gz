@@ -7,13 +7,13 @@ describe('Nomenclator parser', () => {
     expect(divisions.toArray())
       .toEqual([{
         id: '15',
-        name: 'CORUÑA, A'
+        name: 'A Coruña'
       }, {
         id: '27',
-        name: 'LUGO'
+        name: 'Lugo'
       }, {
         id: '32',
-        name: 'OURENSE'
+        name: 'Ourense'
       }]);
   });
 });
