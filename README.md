@@ -1,4 +1,4 @@
-# Galiza Adminstrative Levels
+# Galiza Administrative Levels
 
 Service with galician's administrative levels.
 
@@ -23,5 +23,5 @@ yarn --silent nomenclator-extract path/to/nomenclator-file.csv
 Extract administrative division form nomenclator
 
 ```shell
-yarn --silent shapefiles-extract --provincias path/to/provincias_shapefiles
+yarn --silent shapefiles-extract --provinces path/to/provincias_shapefiles
 ```
