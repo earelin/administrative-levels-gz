@@ -2,7 +2,9 @@ const shapefilesParser = require('../../src/shapefiles/parser');
 
 describe('Shapefile parser', () => {
   test('Should extract admin levels', async () => {
-    const divisions = await shapefilesParser('./__test__/data/parroquias-test');
+    const divisions = await shapefilesParser(
+      './__test__/data/parroquias-test',
+      './__test__/data/poboacions-test');
 
     expect(divisions.toJSON())
       .toEqual([{
@@ -17,7 +19,11 @@ describe('Shapefile parser', () => {
             subLevels: [{
               id: '1500809',
               name: 'Vixoi (San Fiz)',
-              subLevels: []
+              subLevels: [{
+                id: '150080902',
+                name: 'Pisón',
+                subLevels: []
+              }]
             }]
           }]
         }, {
@@ -29,11 +35,23 @@ describe('Shapefile parser', () => {
             subLevels: [{
               id: '1508201',
               name: 'Cacheiras (San Simón de Ons)',
-              subLevels: []
+              subLevels: [{
+                id: '150820107',
+                name: 'Feros',
+                subLevels: []
+              }, {
+                id: '150820125',
+                name: 'Parque Montouto',
+                subLevels: []
+              }]
             }, {
               id: '1508202',
               name: 'Calo (San Xoán)',
-              subLevels: []
+              subLevels: [{
+                id: '150820213',
+                name: 'As Galanas',
+                subLevels: []
+              }]
             }]
           }]
         }]
@@ -49,7 +67,11 @@ describe('Shapefile parser', () => {
             subLevels: [{
               id: '2700405',
               name: 'A Esperela (San Pedro)',
-              subLevels: []
+              subLevels: [{
+                id: '270040501',
+                name: 'O Cádavo',
+                subLevels: []
+              }]
             }]
           }]
         }]
