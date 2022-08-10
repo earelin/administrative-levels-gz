@@ -1,25 +1,33 @@
 const {AdminLevel, AdminLevelAggregator} = require('../admin-levels');
 const shapefile = require('shapefile');
 
-async function shapefilesParser(provincesShapefilePath) {
+async function shapefilesParser(parroquiasShapefilePath) {
   const adminLevels = new AdminLevelAggregator();
 
-  await readAdminLevels(adminLevels, provincesShapefilePath);
-
-  return adminLevels;
-}
-
-async function readAdminLevels(parent, shapefile) {
-  const source = await openShapefile(shapefile);
+  const source = await openShapefile(parroquiasShapefilePath);
 
   let result;
   do {
     result = await source.read();
     if (!result.done) {
       const properties = result.value.properties;
-      parent.addSubLevel(new AdminLevel(String(properties.CodPROV), properties.Provincia));
+
+      const province = addLevelToParent(adminLevels, properties.CodPROV, properties.Provincia);
+      addLevelToParent(province, properties.CodCOM, properties.Comarca);
     }
   } while (!result.done);
+
+  return adminLevels;
+}
+
+function addLevelToParent(parent, id, name) {
+  let level = new AdminLevel(String(id), name);
+  if (parent.hasSubLevel(level)) {
+    level = parent.findSubLevelById(level.id);
+  } else {
+    parent.addSubLevel(level);
+  }
+  return level;
 }
 
 async function openShapefile(path) {
