@@ -1,4 +1,4 @@
-# Nives Administrativos de Galiza
+# Niveis Administrativos de Galiza
 
 Servizo cos niveis administrativos de Galiza.
 
