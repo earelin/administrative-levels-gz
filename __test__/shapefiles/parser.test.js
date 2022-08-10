@@ -11,11 +11,19 @@ describe('Shapefile parser', () => {
         subLevels: [{
           id: '2',
           name: 'A Coruña',
-          subLevels: []
+          subLevels: [{
+            id: '15008',
+            name: 'Bergondo',
+            subLevels: []
+          }]
         }, {
           id: '15',
           name: 'Santiago',
-          subLevels: []
+          subLevels: [{
+            id: '15082',
+            name: 'Teo',
+            subLevels: []
+          }]
         }]
       }, {
         id: '27',
@@ -23,7 +31,11 @@ describe('Shapefile parser', () => {
         subLevels: [{
           id: '19',
           name: 'A Fonsagrada',
-          subLevels: []
+          subLevels: [{
+            id: '27004',
+            name: 'Baleira',
+            subLevels: []
+          }]
         }]
       }]);
   });
