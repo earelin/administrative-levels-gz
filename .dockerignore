@@ -1,7 +1,6 @@
 .github/
 .idea/
 __test__/
-acceptance-test/
 node_modules/
 .eslintrc.json
 .gitignore
