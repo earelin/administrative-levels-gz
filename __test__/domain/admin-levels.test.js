@@ -4,6 +4,15 @@ describe('Political divisions', () => {
 
   const PROVINCE_ID = '15';
   const PROVINCE_NAME = 'A Coruña';
+  const LEVELS = [{
+    id: '6',
+    name: 'A Regueira',
+    subLevels: [{
+      id: '8',
+      name: 'O Souto',
+      subLevels: []
+    }]
+  }];
 
   describe('Aggregator', () => {
     test('Should add level', () => {
@@ -52,7 +61,7 @@ describe('Political divisions', () => {
 
       expect(divisions.findSubLevelById(province.id))
         .toBe(province);
-    })
+    });
   });
 
   describe('Administrative Level', () => {
@@ -64,6 +73,12 @@ describe('Political divisions', () => {
         .toBe(PROVINCE_ID);
       expect(province.name)
         .toBe(PROVINCE_NAME);
+    });
+
+    test('Should create from raw data', () => {
+      const level = AdminLevel.from(LEVELS);
+      expect(level)
+        .toBeInstanceOf(AdminLevel);
     });
   });
 });

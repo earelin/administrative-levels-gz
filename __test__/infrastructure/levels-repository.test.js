@@ -17,6 +17,6 @@ describe('Levels repository tests', () => {
 
   test('Should return list', () => {
     expect(levelsRepository.findAll())
-      .toEqual(LEVELS);
+      .toHaveLength(2);
   });
 });

@@ -10,4 +10,18 @@ router.get('/', (req, res) => {
     })));
 });
 
+router.get('/:province', (req, res) => {
+  const province = levelsRepository.findById(req.params.province);
+
+  res.send({
+      id: province.id,
+      name: province.name,
+      comarcas: Array.from(province.subLevels.values())
+        .map(comarca => ({
+          id: comarca.id,
+          name: comarca.name
+        }))
+    });
+});
+
 module.exports = router;

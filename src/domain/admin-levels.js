@@ -24,6 +24,14 @@ class AdminLevelAggregator {
 }
 
 class AdminLevel extends AdminLevelAggregator {
+  static from(level) {
+    const adminLevel = new AdminLevel(level.id, level.name);
+    level.subLevels
+      ?.map(subLevel => AdminLevel.from(subLevel))
+      .forEach(subLevel => adminLevel.addSubLevel(subLevel));
+    return adminLevel;
+  }
+
   constructor(id, name) {
     super();
     this.id = id;
