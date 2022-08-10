@@ -31,6 +31,9 @@ resource "google_cloud_run_service" "admin-levels-gz" {
     spec {
       containers {
         image = "europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz"
+        ports {
+          container_port = 9000
+        }
       }
     }
   }
