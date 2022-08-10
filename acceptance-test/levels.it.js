@@ -27,4 +27,32 @@ describe('Provinces', () => {
         }]
       });
   });
+
+  it('Should return comarca data', async () => {
+    return pactum.spec()
+      .get(`${TEST_BASE_URL}/levels/15/2`)
+      .expectStatus(200)
+      .expectBody({
+        id: '2',
+        name: 'A Coruña',
+        concellos: [{
+          id: '15008',
+          name: 'Bergondo'
+        }]
+      });
+  });
+
+  it('Should return concello data', async () => {
+    return pactum.spec()
+      .get(`${TEST_BASE_URL}/levels/15/2/15008`)
+      .expectStatus(200)
+      .expectBody({
+        id: '15008',
+        name: 'Bergondo',
+        parroquias: [{
+          id: '1500809',
+          name: 'Vixoi (San Fiz)'
+        }]
+      });
+  });
 });
