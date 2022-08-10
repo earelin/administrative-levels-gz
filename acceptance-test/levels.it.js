@@ -55,4 +55,18 @@ describe('Provinces', () => {
         }]
       });
   });
+
+  it('Should return parroquia data', async () => {
+    return pactum.spec()
+      .get(`${TEST_BASE_URL}/levels/15/2/15008/1500809`)
+      .expectStatus(200)
+      .expectBody({
+        id: '1500809',
+        name: 'Vixoi (San Fiz)',
+        poboacions: [{
+          id: '150080902',
+          name: 'Pisón'
+        }]
+      });
+  });
 });
