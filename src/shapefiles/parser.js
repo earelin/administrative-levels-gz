@@ -4,7 +4,13 @@ const shapefile = require('shapefile');
 async function shapefilesParser(parroquiasShapefilePath) {
   const adminLevels = new AdminLevelAggregator();
 
-  const source = await openShapefile(parroquiasShapefilePath);
+  await processParroquiasShapefile(parroquiasShapefilePath, adminLevels);
+
+  return adminLevels;
+}
+
+async function processParroquiasShapefile(shapefilePath, adminLevels) {
+  const source = await openShapefile(shapefilePath);
 
   let result;
   do {
@@ -18,9 +24,9 @@ async function shapefilesParser(parroquiasShapefilePath) {
       addLevelToParent(concello, properties.CodPARRO, properties.Parroquia);
     }
   } while (!result.done);
-
-  return adminLevels;
 }
+
+
 
 function addLevelToParent(parent, id, name) {
   let level = new AdminLevel(String(id), name);
