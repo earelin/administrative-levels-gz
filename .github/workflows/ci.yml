@@ -13,8 +13,9 @@ jobs:
         node-version: [16.x]
 
     steps:
+      - id: commit
+        uses: pr-mpt/actions-commit-hash@v1
       - uses: actions/checkout@v3
-
       - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
@@ -49,19 +50,24 @@ jobs:
       - name: gcloud configuration
         uses: 'google-github-actions/setup-gcloud@v0'
       - name: gcloud and Docker integration
-        run: gcloud auth configure-docker
+        run: gcloud auth configure-docker europe-west2-docker.pkg.dev
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
       - name: Terraform linting
-        id: fmt
         run: terraform fmt -check -diff infrastructure
       - name: Terraform init
-        id: init
         run: terraform -chdir=infrastructure init
       - name: Terraform plan
-        id: plan
         run: terraform -chdir=infrastructure plan
       - name: Terraform apply
-        id: apply
         run: terraform -chdir=infrastructure apply -auto-approve -input=false
+
+      - name: Tag image
+        run: docker tag administrative-levels-gz:latest europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:latest
+      - name: Tag latest image
+        run: docker tag administrative-levels-gz:latest europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.commit.outputs.short }}
+      - name: Push image to repository
+        run: docker push europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.commit.outputs.short }}
+      - name: Push latest image to repository
+        run: docker push europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:latest
