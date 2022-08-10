@@ -4,10 +4,13 @@
   "license": "MIT",
   "scripts": {
     "acceptance-test": "jest acceptance-test acceptance-test",
-    "test": "jest __test__",
+    "build": "docker build --tag administrative-levels-gz:latest .",
+    "lint": "eslint src/**/*.js __test__/**/*.js",
     "nomenclator-extract": "node src/nomenclator",
     "shapefiles-extract": "node src/shapefiles",
-    "lint": "eslint src/**/*.js __test__/**/*.js"
+    "start": "docker build --tag administrative-levels-gz:latest . && docker run -d -p 9000:9000 --rm --name admin-levels-gz-dev administrative-levels-gz:latest",
+    "stop": "docker kill admin-levels-gz-dev",
+    "test": "jest __test__"
   },
   "devDependencies": {
     "eslint": "^8.21.0",
