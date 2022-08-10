@@ -13,5 +13,5 @@ terraform {
 
 provider "google" {
   project = "earelin"
-  region = "europe-west2"
+  region  = "europe-west2"
 }

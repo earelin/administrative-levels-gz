@@ -44,7 +44,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
       - name: Terraform linting
         id: fmt
-        run: terraform fmt -check infrastructure
+        run: terraform fmt -check -diff infrastructure
       - name: Terraform init
         id: init
         run: terraform init -chdir=infrastructure
