@@ -11,9 +11,6 @@ describe('Provinces', () => {
       }, {
         id: '27',
         name: 'Lugo'
-      }, {
-        id: '32',
-        name: 'Ourense'
       }]);
   });
 });
