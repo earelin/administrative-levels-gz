@@ -19,29 +19,38 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
-      - run: yarn install
-      - run: yarn lint
-      - run: yarn test
-      - run: yarn start
-      - run: yarn acceptance-test
+      - name: Install dependencies
+        run: yarn install
+      - name: Linting
+        run: yarn lint
+      - name: Unit testing
+        run: yarn test
+      - name: Launching acceptance testing environment
+        run: yarn start
+      - name: Acceptance tests
+        run: yarn acceptance-test
 
-      - id: 'auth'
+      - name: Google Cloud Authentication
+        id: 'auth'
         uses: 'google-github-actions/auth@v0'
         with:
           credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
-      - uses: 'google-github-actions/setup-gcloud@v0'
-      - run: gcloud auth configure-docker
+      - name: gcloud configuration
+        uses: 'google-github-actions/setup-gcloud@v0'
+      - name: gcloud and Docker integration
+        run: gcloud auth configure-docker
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
-      - id: fmt
-        run: terraform fmt -check -chdir=infrastructure
-      - name: Terraform Init
+      - name: Terraform linting
+        id: fmt
+        run: terraform fmt -check infrastructure
+      - name: Terraform init
         id: init
         run: terraform init -chdir=infrastructure
-      - name: Terraform Plan
+      - name: Terraform plan
         id: plan
         run: terraform plan -chdir=infrastructure
-      - name: Terraform Apply
+      - name: Terraform apply
         id: apply
         run: terraform apply -auto-approve -input=false  -chdir=infrastructure
