@@ -1,26 +1,24 @@
-# Galiza Administrative Levels
+# Nives Administrativos de Galiza
 
-Service with galician's administrative levels.
+Servizo cos niveis administrativos de Galiza.
 
-## Install
-
-Install deps
+## Instalacion
 
 ```shell
 yarn install
 ```
 
-## Usage
+## Uso
 
-### Extract data
+### Extraer informacion
 
-Extract administrative division form nomenclator
+Extraer as divisions administrativas do nomenclator.
 
 ```shell
 yarn --silent nomenclator-extract path/to/nomenclator-file.csv
 ```
 
-Extract administrative division form nomenclator
+Extraer as divisions administrativas dos shapefiles.
 
 ```shell
 yarn --silent shapefiles-extract --provinces path/to/provincias_shapefiles

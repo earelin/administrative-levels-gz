@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest",
     "nomenclator-extract": "node src/nomenclator",
-    "shapefiles-extract": "node src/nomenclator",
+    "shapefiles-extract": "node src/shapefiles",
     "lint": "eslint src/**/*.js __test__/**/*.js"
   },
   "devDependencies": {
@@ -19,6 +19,8 @@
   },
   "dependencies": {
     "csv-parser": "^3.0.0",
-    "lodash": "^4.17.21"
+    "lodash": "^4.17.21",
+    "shapefile": "^0.6.6",
+    "yargs": "^17.5.1"
   }
 }

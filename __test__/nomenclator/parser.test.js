@@ -1,7 +1,7 @@
 const nomenclatorParser = require('../../src/nomenclator/parser');
 
 describe('Nomenclator parser', () => {
-  test('Should extract provinces', async () => {
+  test('Should extract admin levels', async () => {
     const divisions = await nomenclatorParser('./__test__/data/data.csv');
 
     expect(divisions.toJSON())
