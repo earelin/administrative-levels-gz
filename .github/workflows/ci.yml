@@ -19,15 +19,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
+        with:
+          credentials_json: '${{ secrets.GCLOUD_SERVICE_KEY }}'
       - run: yarn install
       - run: yarn lint
       - run: yarn test
       - run: yarn start
       - run: yarn acceptance-test
-      - uses: RafikFarhad/push-to-gcr-github-action@v4.1
-        with:
-          gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }} # can be base64 encoded or plain text
-          registry: gcr.io
-          project_id: admin-levels-gz
-          image_name: administrative-levels-gz
-          image_tag: latest,v1
+
