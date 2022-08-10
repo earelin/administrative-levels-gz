@@ -116,5 +116,10 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# JetBrains
 .idea/
 *.out
+
+# Terraform
+infrastructure/.terraform/
+infrastructure/.terraform.lock.hcl
