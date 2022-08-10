@@ -1,3 +1,5 @@
+const shapefilesParser = require('./parser');
+
 const argv = require('yargs')
   .scriptName("shapefile-extract")
   .usage('$0 --provincia [shapefile]')
@@ -9,4 +11,5 @@ const argv = require('yargs')
   .help()
   .argv;
 
-console.log(argv);
+shapefilesParser(argv.provincia)
+  .then(result => console.log(JSON.stringify(result)));
