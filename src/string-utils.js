@@ -40,7 +40,45 @@ function undoCommaSplit(string) {
   return string;
 }
 
+function extractIneCodeComponents(input) {
+  const extractComponentsStrings = /([0-9][0-9])([0-9][0-9][0-9])?([0-9][0-9])?/;
+  const componentsStrings = extractComponentsStrings.exec(input);
+
+  if (doesNotMatchIneCodePattern(componentsStrings)) {
+    return null;
+  }
+
+  return convertRegexResultToComponents(componentsStrings, input);
+}
+
+function doesNotMatchIneCodePattern(componentsStrings) {
+  return !componentsStrings || !componentsStrings[1];
+}
+
+function convertRegexResultToComponents(componentsStrings, input) {
+  const components = {
+    provincia: componentsStrings[1]
+  };
+
+  if (input.length >= 5) {
+    components.concello = components.provincia + componentsStrings[2];
+  }
+
+  if (input.length >= 7) {
+    components.parroquia = components.concello + componentsStrings[3];
+  }
+
+  if (input.length === 9) {
+    components.poboacion = input;
+  }
+
+  return components;
+}
+
+
+
 module.exports = {
   capitalizeWords,
+  extractIneCodeComponents,
   undoCommaSplit
 };
