@@ -35,13 +35,13 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
       - id: fmt
-        run: terraform fmt -check
+        run: terraform fmt -check -chdir=infrastructure
       - name: Terraform Init
         id: init
-        run: terraform init
+        run: terraform init -chdir=infrastructure
       - name: Terraform Plan
         id: plan
-        run: terraform plan
+        run: terraform plan -chdir=infrastructure
       - name: Terraform Apply
         id: apply
-        run: terraform apply -auto-approve -input=false
+        run: terraform apply -auto-approve -input=false  -chdir=infrastructure
