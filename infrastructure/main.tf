@@ -17,7 +17,7 @@ provider "google" {
   region  = "europe-west2"
 }
 
-resource "google_artifact_registry_repository" "administrative-levels-gz-repo" {
+resource "google_artifact_registry_repository" "administrative-levels-gz" {
   repository_id = "administrative-levels-gz"
   format        = "DOCKER"
 }
