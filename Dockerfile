@@ -7,4 +7,4 @@ COPY ["src", "package.json", "yarn.lock", "./"]
 RUN yarn install --production
 
 EXPOSE 9000
-CMD [ "node", "index.js" ]
+CMD [ "node", "application/rest/index.js" ]

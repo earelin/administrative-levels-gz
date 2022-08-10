@@ -1,4 +1,4 @@
-const shapefilesParser = require('../../src/shapefiles/parser');
+const shapefilesParser = require('../../../../src/application/cli/shapefiles/parser');
 
 describe('Shapefile parser', () => {
   test('Should extract admin levels', async () => {

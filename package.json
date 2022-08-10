@@ -5,11 +5,11 @@
   "scripts": {
     "acceptance-test": "jest acceptance-test acceptance-test",
     "build": "docker build --tag administrative-levels-gz:latest .",
-    "dev": "nodemon src/index.js",
+    "dev": "nodemon src/application/rest/index.js",
     "lint": "eslint src/**/*.js __test__/**/*.js",
-    "nomenclator-extract": "node src/nomenclator",
+    "nomenclator-extract": "node src/application/cli/nomenclator",
     "restart": "docker kill admin-levels-gz-dev && docker build --tag administrative-levels-gz:latest . && docker run -d -p 9000:9000 --rm --name admin-levels-gz-dev administrative-levels-gz:latest",
-    "shapefiles-extract": "node src/shapefiles",
+    "shapefiles-extract": "node src/application/cli/shapefiles",
     "start": "docker build --tag administrative-levels-gz:latest . && docker run -d -p 9000:9000 --rm --name admin-levels-gz-dev administrative-levels-gz:latest",
     "stop": "docker kill admin-levels-gz-dev",
     "test": "jest __test__"
@@ -22,8 +22,8 @@
     "pactum": "^3.1.13"
   },
   "bin": {
-    "nomenclator-extract": "src/nomenclator/index.js",
-    "shapefiles-extract": "src/shapefiles/index.js"
+    "nomenclator-extract": "src/application/cli/nomenclator/index.js",
+    "shapefiles-extract": "src/application/cli/shapefiles/index.js"
   },
   "dependencies": {
     "csv-parser": "^3.0.0",

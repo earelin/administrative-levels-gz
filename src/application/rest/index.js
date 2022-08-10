@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const monitoring = require('./application/monitoring');
-const levels = require('./application/levels');
+const monitoring = require('./monitoring');
+const levels = require('./levels');
 
 const PORT = 9000;
 

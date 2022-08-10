@@ -1,4 +1,4 @@
-const {AdminLevel, AdminLevelAggregator} = require('../src/admin-levels');
+const {AdminLevel, AdminLevelAggregator} = require('../../src/domain/admin-levels');
 
 describe('Political divisions', () => {
 

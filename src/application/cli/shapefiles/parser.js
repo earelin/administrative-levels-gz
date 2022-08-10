@@ -1,6 +1,6 @@
-const {AdminLevel, AdminLevelAggregator} = require('../admin-levels');
+const {AdminLevel, AdminLevelAggregator} = require('../../../domain/admin-levels');
 const shapefile = require('shapefile');
-const {extractIneCodeComponents} = require('../string-utils');
+const {extractIneCodeComponents} = require('../../../string-utils');
 
 async function shapefilesParser(parroquiasShapefilePath, poboacionsShapefilePath) {
   const poboacions = await processPoboacionsShapefile(poboacionsShapefilePath);

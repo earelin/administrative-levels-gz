@@ -1,4 +1,4 @@
-const nomenclatorParser = require('../../src/nomenclator/parser');
+const nomenclatorParser = require('../../../../src/application/cli/nomenclator/parser');
 
 describe('Nomenclator parser', () => {
   test('Should extract admin levels', async () => {
