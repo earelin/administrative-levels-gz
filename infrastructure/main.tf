@@ -24,7 +24,7 @@ resource "google_artifact_registry_repository" "admin-levels-gz" {
 }
 
 resource "google_cloud_run_service" "admin-levels-gz" {
-  name = "admin-levels-gz"
+  name     = "admin-levels-gz"
   location = "europe-west2"
 
   template {
