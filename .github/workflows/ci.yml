@@ -14,12 +14,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - id: 'auth'
-        uses: 'google-github-actions/auth@v0'
-        with:
-          credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+
+      - uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'yarn'
@@ -29,6 +25,9 @@ jobs:
       - run: yarn start
       - run: yarn acceptance-test
 
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v0'
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          credentials_json: ${{ secrets.GCLOUD_SERVICE_KEY }}
+      - uses: 'google-github-actions/setup-gcloud@v0'
       - run: gcloud auth configure-docker
