@@ -29,12 +29,13 @@ shapefile-extract -p [shapefiles_path]
 
 Options:
       --version     Show version number
-  -p, --parroquias  Parroquias shapefiles path (no extension)   [required]
+  -e, --entidades   Entidades de poboacion shapefiles path (no extension)   [required]
+  -p, --parroquias  Parroquias shapefiles path (no extension)               [required]
       --help        Show help        
 ```
 
 Comando usando yarn.
 
 ```shell
-yarn --silent shapefiles-extract -p path/to/parroquias_shapefiles
+yarn --silent shapefiles-extract -e path/to/entidates_shapefiles -p path/to/parroquias_shapefiles
 ```

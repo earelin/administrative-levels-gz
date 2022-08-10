@@ -25,7 +25,8 @@ async function processParroquiasShapefile(poboacions, shapefilePath, adminLevels
       const concello = addLevelToParent(comarca, properties.CodCONC, properties.Concello);
       const parroquia = addLevelToParent(concello, properties.CodPARRO, properties.Parroquia);
 
-      parroquia.subLevels = poboacions.get(parroquia.id);
+      poboacions.get(parroquia.id)
+        ?.forEach(poboacion => parroquia.addSubLevel(poboacion));
     }
   } while (!result.done);
 }
