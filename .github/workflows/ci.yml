@@ -24,3 +24,10 @@ jobs:
       - run: yarn test
       - run: yarn start
       - run: yarn acceptance-test
+      - uses: RafikFarhad/push-to-gcr-github-action@v4.1
+        with:
+          gcloud_service_key: ${{ secrets.GCLOUD_SERVICE_KEY }} # can be base64 encoded or plain text
+          registry: gcr.io
+          project_id: admin-levels-gz
+          image_name: administrative-levels-gz
+          image_tag: latest,v1
