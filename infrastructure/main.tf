@@ -20,4 +20,5 @@ provider "google" {
 resource "google_artifact_registry_repository" "admin-levels-gz" {
   repository_id = "admin-levels-gz"
   format        = "DOCKER"
+  location      = "europe-west2"
 }
