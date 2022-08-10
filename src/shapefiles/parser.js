@@ -14,7 +14,8 @@ async function shapefilesParser(parroquiasShapefilePath) {
 
       const province = addLevelToParent(adminLevels, properties.CodPROV, properties.Provincia);
       const comarca = addLevelToParent(province, properties.CodCOM, properties.Comarca);
-      addLevelToParent(comarca, properties.CodCONC, properties.Concello);
+      const concello = addLevelToParent(comarca, properties.CodCONC, properties.Concello);
+      addLevelToParent(concello, properties.CodPARRO, properties.Parroquia);
     }
   } while (!result.done);
 

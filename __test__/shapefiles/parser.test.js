@@ -14,7 +14,11 @@ describe('Shapefile parser', () => {
           subLevels: [{
             id: '15008',
             name: 'Bergondo',
-            subLevels: []
+            subLevels: [{
+              id: '1500809',
+              name: 'Vixoi (San Fiz)',
+              subLevels: []
+            }]
           }]
         }, {
           id: '15',
@@ -22,7 +26,15 @@ describe('Shapefile parser', () => {
           subLevels: [{
             id: '15082',
             name: 'Teo',
-            subLevels: []
+            subLevels: [{
+              id: '1508201',
+              name: 'Cacheiras (San Simón de Ons)',
+              subLevels: []
+            }, {
+              id: '1508202',
+              name: 'Calo (San Xoán)',
+              subLevels: []
+            }]
           }]
         }]
       }, {
@@ -34,7 +46,11 @@ describe('Shapefile parser', () => {
           subLevels: [{
             id: '27004',
             name: 'Baleira',
-            subLevels: []
+            subLevels: [{
+              id: '2700405',
+              name: 'A Esperela (San Pedro)',
+              subLevels: []
+            }]
           }]
         }]
       }]);
