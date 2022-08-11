@@ -28,22 +28,10 @@ jobs:
 
       - name: Download image
         run: docker pull europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.commit.outputs.short }}
-      - name: Tag image versiom
+      - name: Tag image
         run: docker tag europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.commit.outputs.short }} europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.tag.outputs.tag }}
-      - name: Tag image as latest
-        run: docker tag europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.commit.outputs.short }} europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:latest
       - name: Push versioned image to repository
         run: docker push europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.tag.outputs.tag }}
-      - name: Push latest image to repository
-        run: docker push europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:latest
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-      - name: Terraform linting
-        run: terraform fmt -check -diff infrastructure
-      - name: Terraform init
-        run: terraform -chdir=infrastructure init
-      - name: Terraform plan
-        run: terraform -chdir=infrastructure plan
-      - name: Terraform apply
-        run: terraform -chdir=infrastructure apply -auto-approve -input=false
+      - name: Update containers
+        run: gcloud run deploy admin-levels-gz --regeion europe-west2 --image europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.tag.outputs.tag }}
