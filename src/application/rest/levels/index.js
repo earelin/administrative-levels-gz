@@ -40,6 +40,19 @@ router.get('/:province/:comarca/:concello/:parroquia', (req, res) => {
   res.send(mapLevelToDao(parroquia, 'poboacions'));
 });
 
+router.get('/:province/:comarca/:concello/:parroquia/:poboacion', (req, res) => {
+  const province = levelsRepository.findById(req.params.province);
+  const comarca = province.findSubLevelById(req.params.comarca);
+  const concello = comarca.findSubLevelById(req.params.concello);
+  const parroquia = concello.findSubLevelById(req.params.parroquia);
+  const poboacion = parroquia.findSubLevelById(req.params.poboacion);
+
+  res.send({
+    id: poboacion.id,
+    name: poboacion.name
+  });
+});
+
 function mapLevelToDao(level, subdivision) {
   return {
     id: level.id,

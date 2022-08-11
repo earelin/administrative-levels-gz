@@ -69,4 +69,14 @@ describe('Provinces', () => {
         }]
       });
   });
+
+  it('Should return poboacion data', async () => {
+    return pactum.spec()
+      .get(`${TEST_BASE_URL}/levels/15/2/15008/1500809/150080902`)
+      .expectStatus(200)
+      .expectBody({
+        id: '150080902',
+        name: 'Pisón',
+      });
+  });
 });
