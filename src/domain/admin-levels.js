@@ -56,8 +56,21 @@ const LevelTypes = Object.freeze({
   Poboacion: Symbol("poboacion")
 });
 
+const levelTypesOrder = [LevelTypes.Provincia, LevelTypes.Comarca, LevelTypes.Concello, LevelTypes.Parroquia, LevelTypes.Poboacion];
+
+function lowerLevelOf(parent) {
+  const parentTypeIndex = levelTypesOrder.indexOf(parent);
+
+  if (parentTypeIndex + 1 < levelTypesOrder.length) {
+    return levelTypesOrder[parentTypeIndex + 1];
+  }
+
+  return null;
+}
+
 module.exports = {
   AdminLevelAggregator,
   AdminLevel,
-  LevelTypes
+  LevelTypes,
+  lowerLevelOf
 };

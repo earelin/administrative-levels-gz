@@ -1,4 +1,4 @@
-const {AdminLevel, AdminLevelAggregator, LevelTypes} = require('../../src/domain/admin-levels');
+const {AdminLevel, AdminLevelAggregator, LevelTypes, lowerLevelOf} = require('../../src/domain/admin-levels');
 
 describe('Political divisions', () => {
 
@@ -84,4 +84,15 @@ describe('Political divisions', () => {
         .toBeInstanceOf(AdminLevel);
     });
   });
+
+  describe('Legal types', () => {
+    test.each([
+      [LevelTypes.Provincia, LevelTypes.Comarca],
+      [LevelTypes.Concello, LevelTypes.Parroquia],
+      [LevelTypes.Poboacion, null],
+    ])('Lower level type of %s: %s', (current, next) => {
+      expect(lowerLevelOf(current))
+        .toBe(next);
+    })
+  })
 });
