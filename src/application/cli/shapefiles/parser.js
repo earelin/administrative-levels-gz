@@ -60,7 +60,7 @@ function addLevelToParent(parent, id, name, type) {
   let sanitizedName = name;
   let alternativeNames = [];
 
-  if (name.includes('(')) {
+  if (name && name.includes('(')) {
     sanitizedName = name.slice(0, name.indexOf('(')).trim();
     alternativeNames = [name.slice(name.indexOf('(') + 1 , name.indexOf(')'))];
   }
