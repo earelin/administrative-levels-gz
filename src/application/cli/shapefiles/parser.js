@@ -57,13 +57,7 @@ async function processPoboacionsShapefile(shapefilePath) {
 }
 
 function addLevelToParent(parent, id, name, type) {
-  let sanitizedName = name;
-  let alternativeNames = [];
-
-  if (name && name.includes('(')) {
-    sanitizedName = name.slice(0, name.indexOf('(')).trim();
-    alternativeNames = [name.slice(name.indexOf('(') + 1 , name.indexOf(')'))];
-  }
+  let {sanitizedName, alternativeNames} = sanitizeName(name);
 
   let level = new AdminLevel(String(id), sanitizedName, type, alternativeNames);
   if (parent.hasSubLevel(level)) {
@@ -72,6 +66,20 @@ function addLevelToParent(parent, id, name, type) {
     parent.addSubLevel(level);
   }
   return level;
+}
+
+function sanitizeName(name) {
+  if (name && name.includes('(')) {
+    return {
+      sanitizedName: name.slice(0, name.indexOf('(')).trim(),
+      alternativeNames: [name.slice(name.indexOf('(') + 1 , name.indexOf(')'))]
+    }
+  }
+
+  return {
+    sanitizedName: name,
+    alternativeNames: []
+  };
 }
 
 async function openShapefile(path) {

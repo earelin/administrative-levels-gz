@@ -14,6 +14,16 @@ describe('Political divisions', () => {
       subLevels: []
     }]
   }];
+  const PROVINCE_GEOMETRY = {
+    type: "Feature",
+    geomerty: {
+      type: 'Polygon',
+      coordinates: [
+        [100.0, 0.0], [101.0, 0.0], [101.0, 1.0],
+        [100.0, 1.0], [100.0, 0.0]
+      ]
+    }
+  };
 
   describe('Aggregator', () => {
     test('Should add level', () => {
@@ -81,7 +91,7 @@ describe('Political divisions', () => {
     });
 
     test('Should create from raw data', () => {
-      const level = AdminLevel.from(LEVELS[0], LevelTypes.Provincia);
+      const level = AdminLevel.from(LEVELS[0], sLevelTypes.Provincia);
 
       expect(level)
         .toBeInstanceOf(AdminLevel);
@@ -108,6 +118,13 @@ describe('Political divisions', () => {
 
       expect(level.alternativeNames)
         .toContain('San Fiz');
+    });
+
+    test('Should set and return geometry.', () => {
+      const level = new AdminLevel(PROVINCE_ID, PROVINCE_NAME, PROVINCE_TYPE, [], PROVINCE_GEOMETRY);
+
+      expect(level.geometry)
+        .toEqual(PROVINCE_GEOMETRY);
     });
   });
 
