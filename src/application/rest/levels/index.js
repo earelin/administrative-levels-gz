@@ -53,7 +53,8 @@ function mapLevelToDao(level) {
     id: level.id,
     name: level.name,
     alternativeNames: Array.from(level.alternativeNames),
-    type: levelTypeToString(level.type)
+    type: levelTypeToString(level.type),
+    geometry: level.geometry
   }
 }
 

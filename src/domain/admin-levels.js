@@ -25,7 +25,7 @@ class AdminLevelAggregator {
 
 class AdminLevel extends AdminLevelAggregator {
   static from(rawLevel, type = LevelTypes.Unknown) {
-    const adminLevel = new AdminLevel(rawLevel.id, rawLevel.name, type, rawLevel.alternativeNames);
+    const adminLevel = new AdminLevel(rawLevel.id, rawLevel.name, type, rawLevel.alternativeNames, rawLevel.geometry);
     const lowerLevel = lowerLevelOf(type);
     rawLevel.subLevels
       ?.map(subLevel => AdminLevel.from(subLevel, lowerLevel))
