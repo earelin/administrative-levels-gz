@@ -10,7 +10,6 @@ router.get('/', (req, res) => {
 
 router.get('/:province', (req, res) => {
   const province = levelsRepository.findById(req.params.province);
-  console.log(province);
 
   res.send(mapLevelSubTreeToDao(province, 'comarcas'));
 });
