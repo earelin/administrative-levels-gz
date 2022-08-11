@@ -10,13 +10,11 @@ describe('Provinces', () => {
         name: 'A Coruña',
         alternativeNames: [],
         type: 'Provincia',
-        geometry: null
       }, {
         id: '27',
         name: 'Lugo',
         alternativeNames: [],
         type: 'Provincia',
-        geometry: null
       }]);
   });
 
@@ -29,13 +27,11 @@ describe('Provinces', () => {
         name: 'Lugo',
         alternativeNames: [],
         type: 'Provincia',
-        geometry: null,
         subLevels: [{
           id: '19',
           name: 'A Fonsagrada',
           alternativeNames: [],
           type: 'Comarca',
-          geometry: null,
         }]
       });
   });
@@ -49,13 +45,11 @@ describe('Provinces', () => {
         name: 'A Coruña',
         alternativeNames: [],
         type: 'Comarca',
-        geometry: null,
         subLevels: [{
           id: '15008',
           name: 'Bergondo',
           alternativeNames: [],
           type: 'Concello',
-          geometry: null
         }]
       });
   });
@@ -69,13 +63,11 @@ describe('Provinces', () => {
         name: 'Bergondo',
         type: 'Concello',
         alternativeNames: [],
-        geometry: null,
         subLevels: [{
           id: '1500809',
           type: 'Parroquia',
           name: 'Vixoi',
-          alternativeNames: ['San Fiz'],
-          geometry: null
+          alternativeNames: ['San Fiz']
         }]
       });
   });
@@ -89,19 +81,11 @@ describe('Provinces', () => {
         name: 'Vixoi',
         alternativeNames: ['San Fiz'],
         type: 'Parroquia',
-        geometry: null,
         subLevels: [{
           id: '150080902',
           name: 'Pisón',
           alternativeNames: [],
-          type: 'Poboacion',
-          geometry: {
-            type: 'Feature',
-            geometry: {
-              coordinates: [561835.9694501489, 4794254.922073605],
-              type: 'Point'
-            }
-          }
+          type: 'Poboacion'
         }]
       });
   });
@@ -114,14 +98,7 @@ describe('Provinces', () => {
         id: '150080902',
         name: 'Pisón',
         alternativeNames: [],
-        type: 'Poboacion',
-        geometry: {
-          type: 'Feature',
-          geometry: {
-            coordinates: [561835.9694501489, 4794254.922073605],
-            type: 'Point'
-          }
-        }
+        type: 'Poboacion'
       });
   });
 });

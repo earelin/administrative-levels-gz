@@ -23,14 +23,12 @@ describe('Levels repository tests', () => {
         alternativeNames: [],
         type: 'Provincia',
         subLevels: [],
-        geometry: null
       }, {
         id: '8',
         name: 'O Souto',
         alternativeNames: [],
         type: 'Provincia',
         subLevels: [],
-        geometry: null
       }]);
   });
 });

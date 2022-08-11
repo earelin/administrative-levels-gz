@@ -33,13 +33,12 @@ class AdminLevel extends AdminLevelAggregator {
     return adminLevel;
   }
 
-  constructor(id, name, type = LevelTypes.Unknown, alternativeNames = [], geometry = null) {
+  constructor(id, name, type = LevelTypes.Unknown, alternativeNames = []) {
     super();
     this.id = id;
     this.name = name;
     this.type = type;
     this.alternativeNames = new Set(alternativeNames);
-    this.geometry = geometry;
   }
 
   toJSON() {
@@ -48,8 +47,7 @@ class AdminLevel extends AdminLevelAggregator {
       name: this.name,
       alternativeNames: Array.from(this.alternativeNames),
       type: levelTypeToString(this.type),
-      subLevels: super.toJSON(),
-      geometry: this.geometry
+      subLevels: super.toJSON()
     };
   }
 

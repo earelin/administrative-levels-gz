@@ -20,10 +20,26 @@ async function processParroquiasShapefile(poboacions, shapefilePath, adminLevels
     if (!result.done) {
       const properties = result.value.properties;
 
-      const province = addLevelToParent(adminLevels, properties.CodPROV, properties.Provincia, LevelTypes.Provincia);
-      const comarca = addLevelToParent(province, properties.CodCOM, properties.Comarca, LevelTypes.Comarca);
-      const concello = addLevelToParent(comarca, properties.CodCONC, properties.Concello, LevelTypes.Concello);
-      const parroquia = addLevelToParent(concello, properties.CodPARRO, properties.Parroquia, LevelTypes.Parroquia);
+      const province = addLevelToParent(
+        adminLevels,
+        properties.CodPROV,
+        properties.Provincia,
+        LevelTypes.Provincia);
+      const comarca = addLevelToParent(
+        province,
+        properties.CodCOM,
+        properties.Comarca,
+        LevelTypes.Comarca);
+      const concello = addLevelToParent(
+        comarca,
+        properties.CodCONC,
+        properties.Concello,
+        LevelTypes.Concello);
+      const parroquia = addLevelToParent(
+        concello,
+        properties.CodPARRO,
+        properties.Parroquia,
+        LevelTypes.Parroquia);
 
       poboacions.get(parroquia.id)
         ?.forEach(poboacion => parroquia.addSubLevel(poboacion));
@@ -43,14 +59,12 @@ async function processPoboacionsShapefile(shapefilePath) {
       const properties = result.value.properties;
       const poboacionTree = extractIneCodeComponents(properties.COD_INE9);
       const {sanitizedName, alternativeNames} = sanitizeName(properties.NOME10);
-      const geometry = featureWrap(result.value.geometry);
 
       const poboacion = new AdminLevel(
         properties.COD_INE9,
         sanitizedName,
         LevelTypes.Poboacion,
-        alternativeNames,
-        geometry);
+        alternativeNames);
 
       if (parroquiasPoboacions.has(poboacionTree.parroquia)) {
         const parroquiaPoboacions = parroquiasPoboacions.get(poboacionTree.parroquia);
@@ -64,17 +78,10 @@ async function processPoboacionsShapefile(shapefilePath) {
   return parroquiasPoboacions;
 }
 
-function featureWrap(geometry) {
-  return {
-    type: 'Feature',
-    geometry
-  };
-}
-
-function addLevelToParent(parent, id, name, type) {
+function addLevelToParent(parent, id, name, type, geometry = null) {
   const {sanitizedName, alternativeNames} = sanitizeName(name);
 
-  let level = new AdminLevel(String(id), sanitizedName, type, alternativeNames);
+  let level = new AdminLevel(String(id), sanitizedName, type, alternativeNames, geometry);
   if (parent.hasSubLevel(level)) {
     level = parent.findSubLevelById(level.id);
   } else {
