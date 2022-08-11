@@ -55,17 +55,8 @@ const LevelTypes = Object.freeze({
   Poboacion: Symbol("poboacion")
 });
 
-const LevelTypesOrder = [
-  LevelTypes.Provincia,
-  LevelTypes.Comarca,
-  LevelTypes.Concello,
-  LevelTypes.Parroquia,
-  LevelTypes.Poboacion
-];
-
 module.exports = {
   AdminLevelAggregator,
   AdminLevel,
-  LevelTypes,
-  LevelTypesOrder
+  LevelTypes
 };
