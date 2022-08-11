@@ -1,5 +1,4 @@
 const LevelsRepository = require('../../src/infrastructure/levels-repository');
-const {LevelTypes} = require('../../src/domain/admin-levels');
 
 const LEVELS = [{
   id: '6',
