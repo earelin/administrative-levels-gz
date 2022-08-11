@@ -1,4 +1,5 @@
 const LevelsRepository = require('../../src/infrastructure/levels-repository');
+const {LevelTypes} = require('../../src/domain/admin-levels');
 
 const LEVELS = [{
   id: '6',
@@ -17,6 +18,16 @@ describe('Levels repository tests', () => {
 
   test('Should return list', () => {
     expect(levelsRepository.findAll())
-      .toHaveLength(2);
+      .toEqual([{
+        id: '6',
+        name: 'A Regueira',
+        type: LevelTypes.Provincia,
+        subLevels: new Map(),
+      }, {
+        id: '8',
+        name: 'O Souto',
+        type: LevelTypes.Provincia,
+        subLevels: new Map()
+      }]);
   });
 });

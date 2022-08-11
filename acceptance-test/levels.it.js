@@ -7,10 +7,12 @@ describe('Provinces', () => {
       .expectStatus(200)
       .expectBody([{
         id: '15',
-        name: 'A Coruña'
+        name: 'A Coruña',
+        type: 'Provincia'
       }, {
         id: '27',
-        name: 'Lugo'
+        name: 'Lugo',
+        type: 'Provincia'
       }]);
   });
 
@@ -21,9 +23,11 @@ describe('Provinces', () => {
       .expectBody({
         id: '27',
         name: 'Lugo',
-        comarcas: [{
+        type: 'Provincia',
+        subLevels: [{
           id: '19',
-          name: 'A Fonsagrada'
+          name: 'A Fonsagrada',
+          type: 'Comarca'
         }]
       });
   });
@@ -35,9 +39,11 @@ describe('Provinces', () => {
       .expectBody({
         id: '2',
         name: 'A Coruña',
-        concellos: [{
+        type: 'Comarca',
+        subLevels: [{
           id: '15008',
-          name: 'Bergondo'
+          name: 'Bergondo',
+          type: 'Concello'
         }]
       });
   });
@@ -49,8 +55,10 @@ describe('Provinces', () => {
       .expectBody({
         id: '15008',
         name: 'Bergondo',
-        parroquias: [{
+        type: 'Concello',
+        subLevels: [{
           id: '1500809',
+          type: 'Parroquia',
           name: 'Vixoi (San Fiz)'
         }]
       });
@@ -63,9 +71,11 @@ describe('Provinces', () => {
       .expectBody({
         id: '1500809',
         name: 'Vixoi (San Fiz)',
-        poboacions: [{
+        type: 'Parroquia',
+        subLevels: [{
           id: '150080902',
-          name: 'Pisón'
+          name: 'Pisón',
+          type: 'Poboacion'
         }]
       });
   });
@@ -77,6 +87,7 @@ describe('Provinces', () => {
       .expectBody({
         id: '150080902',
         name: 'Pisón',
+        type: 'Poboacion'
       });
   });
 });

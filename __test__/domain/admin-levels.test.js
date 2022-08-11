@@ -1,4 +1,4 @@
-const {AdminLevel, AdminLevelAggregator, LevelTypes, lowerLevelOf} = require('../../src/domain/admin-levels');
+const {AdminLevel, AdminLevelAggregator, LevelTypes, lowerLevelOf, levelTypeToString} = require('../../src/domain/admin-levels');
 
 describe('Political divisions', () => {
 
@@ -18,7 +18,7 @@ describe('Political divisions', () => {
   describe('Aggregator', () => {
     test('Should add level', () => {
       const divisions = new AdminLevelAggregator();
-      const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
+      const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME, PROVINCE_TYPE);
 
       divisions.addSubLevel(province);
 
@@ -36,13 +36,14 @@ describe('Political divisions', () => {
 
     test('Should return array of levels', () => {
       const divisions = new AdminLevelAggregator();
-      const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
+      const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME, PROVINCE_TYPE);
       divisions.addSubLevel(province);
 
       expect(divisions.toJSON())
         .toEqual([{
           id: PROVINCE_ID,
           name: PROVINCE_NAME,
+          type: 'Provincia',
           subLevels: []
         }]);
     });
@@ -79,9 +80,22 @@ describe('Political divisions', () => {
     });
 
     test('Should create from raw data', () => {
-      const level = AdminLevel.from(LEVELS);
+      const level = AdminLevel.from(LEVELS[0], LevelTypes.Provincia);
+
       expect(level)
         .toBeInstanceOf(AdminLevel);
+      expect(level.toJSON())
+        .toEqual({
+          id: PROVINCE_ID,
+          name: PROVINCE_NAME,
+          type: 'Provincia',
+          subLevels: [{
+            id: '20',
+            name: 'Santiago',
+            type: 'Comarca',
+            subLevels: []
+          }]
+        })
     });
   });
 
@@ -92,6 +106,13 @@ describe('Political divisions', () => {
       [LevelTypes.Poboacion, null],
     ])('Lower level type of %s: %s', (current, next) => {
       expect(lowerLevelOf(current))
+        .toBe(next);
+    })
+
+    test.each([
+      [LevelTypes.Provincia, 'Provincia']
+    ])('Type to string of %s: %s', (current, next) => {
+      expect(levelTypeToString(current))
         .toBe(next);
     })
   })
