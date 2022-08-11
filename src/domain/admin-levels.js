@@ -43,13 +43,14 @@ class AdminLevel extends AdminLevelAggregator {
     return {
       id: this.id,
       name: this.name,
+      type: this.type,
       subLevels: super.toJSON()
     };
   }
 }
 
 const LevelTypes = Object.freeze({
-  Provincia: Symbol("province"),
+  Provincia: Symbol("provincia"),
   Comarca: Symbol("comarca"),
   Concello: Symbol("concello"),
   Parroquia: Symbol("parroquia"),
