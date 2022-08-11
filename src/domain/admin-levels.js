@@ -33,12 +33,12 @@ class AdminLevel extends AdminLevelAggregator {
     return adminLevel;
   }
 
-  constructor(id, name, type) {
+  constructor(id, name, type, alternativeNames = []) {
     super();
     this.id = id;
     this.name = name;
     this.type = type;
-    this.alternativeNames = new Set();
+    this.alternativeNames = new Set(alternativeNames);
   }
 
   toJSON() {
