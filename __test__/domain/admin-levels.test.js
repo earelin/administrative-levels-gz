@@ -1,15 +1,16 @@
-const {AdminLevel, AdminLevelAggregator} = require('../../src/domain/admin-levels');
+const {AdminLevel, AdminLevelAggregator, LevelTypes} = require('../../src/domain/admin-levels');
 
 describe('Political divisions', () => {
 
   const PROVINCE_ID = '15';
   const PROVINCE_NAME = 'A Coruña';
+  const PROVINCE_TYPE = LevelTypes.Provincia;
   const LEVELS = [{
-    id: '6',
-    name: 'A Regueira',
+    id: PROVINCE_ID,
+    name: PROVINCE_NAME,
     subLevels: [{
-      id: '8',
-      name: 'O Souto',
+      id: '20',
+      name: 'Santiago',
       subLevels: []
     }]
   }];
@@ -67,12 +68,14 @@ describe('Political divisions', () => {
   describe('Administrative Level', () => {
 
     test('Should set properties on creation', () => {
-      const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME);
+      const province = new AdminLevel(PROVINCE_ID, PROVINCE_NAME, PROVINCE_TYPE);
 
       expect(province.id)
         .toBe(PROVINCE_ID);
       expect(province.name)
         .toBe(PROVINCE_NAME);
+      expect(province.type)
+        .toBe(PROVINCE_TYPE);
     });
 
     test('Should create from raw data', () => {
