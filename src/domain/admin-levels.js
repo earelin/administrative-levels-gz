@@ -47,7 +47,25 @@ class AdminLevel extends AdminLevelAggregator {
   }
 }
 
+const LevelTypes = Object.freeze({
+  Provincia: Symbol("province"),
+  Comarca: Symbol("comarca"),
+  Concello: Symbol("concello"),
+  Parroquia: Symbol("parroquia"),
+  Poboacion: Symbol("poboacion")
+});
+
+const LevelTypesOrder = [
+  LevelTypes.Provincia,
+  LevelTypes.Comarca,
+  LevelTypes.Concello,
+  LevelTypes.Parroquia,
+  LevelTypes.Poboacion
+];
+
 module.exports = {
   AdminLevelAggregator,
-  AdminLevel
+  AdminLevel,
+  LevelTypes,
+  LevelTypesOrder
 };
