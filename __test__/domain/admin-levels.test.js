@@ -44,6 +44,7 @@ describe('Political divisions', () => {
           id: PROVINCE_ID,
           name: PROVINCE_NAME,
           type: 'Provincia',
+          alternativeNames: [],
           subLevels: []
         }]);
     });
@@ -89,13 +90,24 @@ describe('Political divisions', () => {
           id: PROVINCE_ID,
           name: PROVINCE_NAME,
           type: 'Provincia',
+          alternativeNames: [],
           subLevels: [{
             id: '20',
             name: 'Santiago',
+            alternativeNames: [],
             type: 'Comarca',
             subLevels: []
           }]
         })
+    });
+
+    test('Should set and return list of alternative names', () => {
+      const level = new AdminLevel(PROVINCE_ID, PROVINCE_NAME, PROVINCE_TYPE);
+
+      level.addAlternativeName('San Fiz');
+
+      expect(level.alternativeNames)
+        .toContain('San Fiz');
     });
   });
 
@@ -110,7 +122,8 @@ describe('Political divisions', () => {
     })
 
     test.each([
-      [LevelTypes.Provincia, 'Provincia']
+      [LevelTypes.Provincia, 'Provincia'],
+      [LevelTypes.Parroquia, 'Parroquia']
     ])('Type to string of %s: %s', (current, next) => {
       expect(levelTypeToString(current))
         .toBe(next);

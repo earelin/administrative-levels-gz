@@ -38,16 +38,23 @@ class AdminLevel extends AdminLevelAggregator {
     this.id = id;
     this.name = name;
     this.type = type;
+    this.alternativeNames = new Set();
   }
 
   toJSON() {
     return {
       id: this.id,
       name: this.name,
+      alternativeNames: Array.from(this.alternativeNames),
       type: levelTypeToString(this.type),
       subLevels: super.toJSON()
     };
   }
+
+  addAlternativeName(name) {
+    this.alternativeNames.add(name);
+  }
+
 }
 
 const LevelTypes = Object.freeze({

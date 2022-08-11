@@ -17,17 +17,19 @@ describe('Levels repository tests', () => {
   beforeEach(() => levelsRepository = new LevelsRepository(LEVELS));
 
   test('Should return list', () => {
-    expect(levelsRepository.findAll())
+    expect(levelsRepository.findAll().map(item => item.toJSON()))
       .toEqual([{
         id: '6',
         name: 'A Regueira',
-        type: LevelTypes.Provincia,
-        subLevels: new Map(),
+        alternativeNames: [],
+        type: 'Provincia',
+        subLevels: [],
       }, {
         id: '8',
         name: 'O Souto',
-        type: LevelTypes.Provincia,
-        subLevels: new Map()
+        alternativeNames: [],
+        type: 'Provincia',
+        subLevels: []
       }]);
   });
 });
