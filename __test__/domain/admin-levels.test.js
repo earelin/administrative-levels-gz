@@ -55,7 +55,8 @@ describe('Political divisions', () => {
           name: PROVINCE_NAME,
           type: 'Provincia',
           alternativeNames: [],
-          subLevels: []
+          subLevels: [],
+          geometry: null
         }]);
     });
 
@@ -91,7 +92,7 @@ describe('Political divisions', () => {
     });
 
     test('Should create from raw data', () => {
-      const level = AdminLevel.from(LEVELS[0], sLevelTypes.Provincia);
+      const level = AdminLevel.from(LEVELS[0], LevelTypes.Provincia);
 
       expect(level)
         .toBeInstanceOf(AdminLevel);
@@ -101,12 +102,14 @@ describe('Political divisions', () => {
           name: PROVINCE_NAME,
           type: 'Provincia',
           alternativeNames: [],
+          geometry: null,
           subLevels: [{
             id: '20',
             name: 'Santiago',
             alternativeNames: [],
             type: 'Comarca',
-            subLevels: []
+            subLevels: [],
+            geometry: null
           }]
         })
     });

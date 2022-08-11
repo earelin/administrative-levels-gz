@@ -48,7 +48,8 @@ class AdminLevel extends AdminLevelAggregator {
       name: this.name,
       alternativeNames: Array.from(this.alternativeNames),
       type: levelTypeToString(this.type),
-      subLevels: super.toJSON()
+      subLevels: super.toJSON(),
+      geometry: this.geometry
     };
   }
 

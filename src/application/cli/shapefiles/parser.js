@@ -42,7 +42,15 @@ async function processPoboacionsShapefile(shapefilePath) {
     if (!result.done) {
       const properties = result.value.properties;
       const poboacionTree = extractIneCodeComponents(properties.COD_INE9);
-      const poboacion = new AdminLevel(properties.COD_INE9, properties.NOME10, LevelTypes.Poboacion);
+      const {sanitizedName, alternativeNames} = sanitizeName(properties.NOME10);
+      const geometry = featureWrap(result.value.geometry);
+
+      const poboacion = new AdminLevel(
+        properties.COD_INE9,
+        sanitizedName,
+        LevelTypes.Poboacion,
+        alternativeNames,
+        geometry);
 
       if (parroquiasPoboacions.has(poboacionTree.parroquia)) {
         const parroquiaPoboacions = parroquiasPoboacions.get(poboacionTree.parroquia);
@@ -56,8 +64,15 @@ async function processPoboacionsShapefile(shapefilePath) {
   return parroquiasPoboacions;
 }
 
+function featureWrap(geometry) {
+  return {
+    type: 'Feature',
+    geometry
+  };
+}
+
 function addLevelToParent(parent, id, name, type) {
-  let {sanitizedName, alternativeNames} = sanitizeName(name);
+  const {sanitizedName, alternativeNames} = sanitizeName(name);
 
   let level = new AdminLevel(String(id), sanitizedName, type, alternativeNames);
   if (parent.hasSubLevel(level)) {
