@@ -52,17 +52,6 @@ jobs:
       - name: gcloud and Docker integration
         run: gcloud auth configure-docker europe-west2-docker.pkg.dev
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-      - name: Terraform linting
-        run: terraform fmt -check -diff infrastructure
-      - name: Terraform init
-        run: terraform -chdir=infrastructure init
-      - name: Terraform plan
-        run: terraform -chdir=infrastructure plan
-      - name: Terraform apply
-        run: terraform -chdir=infrastructure apply -auto-approve -input=false
-
       - name: Tag image
         run: docker tag administrative-levels-gz:latest europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:latest
       - name: Tag latest image
