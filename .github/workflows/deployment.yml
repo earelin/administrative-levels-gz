@@ -43,3 +43,6 @@ jobs:
         run: docker tag europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.commit.outputs.short }} europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.tag.outputs.tag }}
       - name: Push image to repository
         run: docker push europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.tag.outputs.tag }}
+
+      - name: Update containers
+        run: gcloud run deploy admin-levels-gz --image europe-west2-docker.pkg.dev/earelin/admin-levels-gz/admin-levels-gz:${{ steps.tag.outputs.tag }}
