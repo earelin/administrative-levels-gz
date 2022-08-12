@@ -2,6 +2,10 @@
 
 Servizo cos niveis administrativos de Galiza.
 
+## Documentación
+
+[Open API documentation](docs/api.yaml)
+
 ## Instalacion
 
 ```shell
@@ -42,8 +46,22 @@ yarn --silent shapefiles-extract -e path/to/entidates_shapefiles -p path/to/parr
 
 ### Lanzar a applicacion en local
 
+Con datos de producción
+
 ```shell
 yarn start-prod
 ```
 
-A application sera acesibel polo porto 9000
+Con datos de probas
+
+```shell
+yarn start
+```
+
+A application estará dispoñíbel polo porto 9000.
+
+Parar a applicación
+
+```shell
+yarn stop
+```
