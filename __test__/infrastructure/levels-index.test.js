@@ -40,4 +40,9 @@ describe('Levels indexes', () => {
     expect(levelsIndex.findComarcaById('15'))
       .toBe(SANTIAGO);
   });
+
+  test('Should return all comarcas', () => {
+    expect(levelsIndex.findAllComarcas())
+      .toEqual([SANTIAGO]);
+  });
 });

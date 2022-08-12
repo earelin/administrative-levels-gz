@@ -30,14 +30,32 @@ describe('Divisions endoints', () => {
         id: '27',
         name: 'Lugo',
         alternativeNames: [],
-        type: 'Provincia',
-        subLevels: [{
-          id: '19',
-          name: 'A Fonsagrada',
-          alternativeNames: [],
-          type: 'Comarca',
-        }]
+        type: 'Provincia'
       });
+  });
+
+  it('Should return all comarcas', async () => {
+    const response = await request.get('/comarcas');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual([{
+        id: '2',
+        name: 'A Coruña',
+        alternativeNames: [],
+        type: 'Comarca'
+      }, {
+        id: '15',
+        name: 'Santiago',
+        alternativeNames: [],
+        type: 'Comarca'
+      }, {
+        id: '19',
+        name: 'A Fonsagrada',
+        alternativeNames: [],
+        type: 'Comarca'
+      }]);
   });
 
   it('Should return comarca data', async () => {
@@ -50,13 +68,7 @@ describe('Divisions endoints', () => {
         id: '2',
         name: 'A Coruña',
         alternativeNames: [],
-        type: 'Comarca',
-        subLevels: [{
-          id: '15008',
-          name: 'Bergondo',
-          alternativeNames: [],
-          type: 'Concello',
-        }]
+        type: 'Comarca'
       });
   });
 
@@ -70,13 +82,7 @@ describe('Divisions endoints', () => {
         id: '15008',
         name: 'Bergondo',
         type: 'Concello',
-        alternativeNames: [],
-        subLevels: [{
-          id: '1500809',
-          type: 'Parroquia',
-          name: 'Vixoi',
-          alternativeNames: ['San Fiz']
-        }]
+        alternativeNames: []
       });
   });
 
@@ -90,13 +96,7 @@ describe('Divisions endoints', () => {
         id: '1500809',
         name: 'Vixoi',
         alternativeNames: ['San Fiz'],
-        type: 'Parroquia',
-        subLevels: [{
-          id: '150080902',
-          name: 'Pisón',
-          alternativeNames: [],
-          type: 'Poboacion'
-        }]
+        type: 'Parroquia'
       });
   });
 
@@ -110,8 +110,7 @@ describe('Divisions endoints', () => {
         id: '150080902',
         name: 'Pisón',
         alternativeNames: [],
-        type: 'Poboacion',
-        subLevels: []
+        type: 'Poboacion'
       });
   });
 });

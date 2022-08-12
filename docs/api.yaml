@@ -8,6 +8,37 @@ servers:
   - url: 'https://admin-levels-gz-luobwhahnq-nw.a.run.app'
 
 paths:
+  /comarcas:
+    get:
+      summary: Todas as comarcas
+      responses:
+        '200':
+          description: Comarcas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdminDivision'
+
+  /comarcas/{idComarca}:
+    get:
+      summary: Obter unha division administrativa por código INE
+      parameters:
+        - in: path
+          name: idComarca
+          schema:
+            type: integer
+          required: true
+          description: Código de comarca
+      responses:
+        '200':
+          description: Comarca
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminDivision'
+
   /divisions/{ineCode}:
     get:
       summary: Obter unha division administrativa por código INE
@@ -62,37 +93,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AdminDivision'
-
-  /comarcas:
-    get:
-      summary: Todas as comarcas
-      responses:
-        '200':
-          description: Comarcas
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/AdminDivision'
-
-  /comarcas/{idComarca}:
-    get:
-      summary: Obter unha division administrativa por código INE
-      parameters:
-        - in: path
-          name: idComarca
-          schema:
-            type: integer
-          required: true
-          description: Código de comarca
-      responses:
-        '200':
-          description: Comarca
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AdminDivision'
 
 components:
   schemas:

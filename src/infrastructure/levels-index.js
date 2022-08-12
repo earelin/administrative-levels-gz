@@ -15,6 +15,10 @@ class LevelsIndex {
   findComarcaById(id) {
     return this.comarcasById.get(id);
   }
+
+  findAllComarcas() {
+    return Array.from(this.comarcasById.values());
+  }
 }
 
 function indexTree(index, comarcasIndex, tree) {
