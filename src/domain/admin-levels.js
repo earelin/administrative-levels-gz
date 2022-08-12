@@ -13,6 +13,10 @@ class AdminLevelAggregator {
     }
   }
 
+  getSubLevelsAsArray() {
+    return Array.from(this.subLevels.values());
+  }
+
   toJSON() {
     return Array.from(this.subLevels.values())
       .map(subLevel => subLevel.toJSON());
@@ -38,7 +42,7 @@ class AdminLevel extends AdminLevelAggregator {
     this.id = id;
     this.name = name;
     this.type = type;
-    this.alternativeNames = new Set(alternativeNames);
+    this.alternativeNames = new Set(alternativeNames)
   }
 
   toJSON() {
