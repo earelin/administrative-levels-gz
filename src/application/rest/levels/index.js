@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {levelsRepository} = require('../../../domain');
+const {levelsIndex, levelsRepository} = require('../../../domain');
 const {levelTypeToString} = require('../../../domain/admin-levels');
 
 router.get('/', (req, res) => {
@@ -8,44 +8,17 @@ router.get('/', (req, res) => {
     .map(province => mapLevelToDao(province)));
 });
 
-router.get('/:province', (req, res) => {
-  const province = levelsRepository.findById(req.params.province);
+router.get('/:ineCode', (req, res) => {
+  const level = levelsIndex.findByIneCode(req.params.ineCode);
 
-  res.send(mapLevelSubTreeToDao(province, 'comarcas'));
+  res.send(mapLevelSubTreeToDao(level));
 });
 
 router.get('/:province/:comarca', (req, res) => {
   const province = levelsRepository.findById(req.params.province);
   const comarca = province.findSubLevelById(req.params.comarca);
 
-  res.send(mapLevelSubTreeToDao(comarca, 'concellos'));
-});
-
-router.get('/:province/:comarca/:concello', (req, res) => {
-  const province = levelsRepository.findById(req.params.province);
-  const comarca = province.findSubLevelById(req.params.comarca);
-  const concello = comarca.findSubLevelById(req.params.concello);
-
-  res.send(mapLevelSubTreeToDao(concello, 'parroquias'));
-});
-
-router.get('/:province/:comarca/:concello/:parroquia', (req, res) => {
-  const province = levelsRepository.findById(req.params.province);
-  const comarca = province.findSubLevelById(req.params.comarca);
-  const concello = comarca.findSubLevelById(req.params.concello);
-  const parroquia = concello.findSubLevelById(req.params.parroquia);
-
-  res.send(mapLevelSubTreeToDao(parroquia, 'poboacions'));
-});
-
-router.get('/:province/:comarca/:concello/:parroquia/:poboacion', (req, res) => {
-  const province = levelsRepository.findById(req.params.province);
-  const comarca = province.findSubLevelById(req.params.comarca);
-  const concello = comarca.findSubLevelById(req.params.concello);
-  const parroquia = concello.findSubLevelById(req.params.parroquia);
-  const poboacion = parroquia.findSubLevelById(req.params.poboacion);
-
-  res.send(mapLevelToDao(poboacion));
+  res.send(mapLevelSubTreeToDao(comarca));
 });
 
 function mapLevelToDao(level) {

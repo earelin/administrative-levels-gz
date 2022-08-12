@@ -2,7 +2,7 @@ const request = require('supertest')(TEST_BASE_URL);
 
 describe('Provinces', () => {
   it('Should return list', async () => {
-    const response = await request.get('/levels');
+    const response = await request.get('/');
 
     expect(response.statusCode)
       .toBe(200);
@@ -21,7 +21,7 @@ describe('Provinces', () => {
   });
 
   it('Should return province data', async () => {
-    const response = await request.get('/levels/27');
+    const response = await request.get('/27');
 
     expect(response.statusCode)
       .toBe(200);
@@ -41,7 +41,7 @@ describe('Provinces', () => {
   });
 
   it('Should return comarca data', async () => {
-    const response = await request.get('/levels/15/2');
+    const response = await request.get('/15/2');
 
     expect(response.statusCode)
       .toBe(200);
@@ -61,7 +61,7 @@ describe('Provinces', () => {
   });
 
   it('Should return concello data', async () => {
-    const response = await request.get('/levels/15/2/15008');
+    const response = await request.get('/15008');
 
     expect(response.statusCode)
       .toBe(200);
@@ -81,7 +81,7 @@ describe('Provinces', () => {
   });
 
   it('Should return parroquia data', async () => {
-    const response = await request.get('/levels/15/2/15008/1500809');
+    const response = await request.get('/1500809');
 
     expect(response.statusCode)
       .toBe(200);
@@ -101,7 +101,7 @@ describe('Provinces', () => {
   });
 
   it('Should return poboacion data', async () => {
-    const response = await request.get('/levels/15/2/15008/1500809/150080902');
+    const response = await request.get('/150080902');
 
     expect(response.statusCode)
       .toBe(200);
@@ -110,7 +110,8 @@ describe('Provinces', () => {
         id: '150080902',
         name: 'Pisón',
         alternativeNames: [],
-        type: 'Poboacion'
+        type: 'Poboacion',
+        subLevels: []
       });
   });
 });
