@@ -3,18 +3,18 @@ const router = express.Router();
 const {levelsIndex, levelsRepository} = require('../../../domain');
 const {levelTypeToString} = require('../../../domain/admin-levels');
 
-router.get('/', (req, res) => {
+router.get('/provincias', (req, res) => {
   res.send(levelsRepository.findAll()
     .map(province => mapLevelToDao(province)));
 });
 
-router.get('/:ineCode', (req, res) => {
+router.get('/divisions/:ineCode', (req, res) => {
   const level = levelsIndex.findByIneCode(req.params.ineCode);
 
   res.send(mapLevelSubTreeToDao(level));
 });
 
-router.get('/:province/:comarca', (req, res) => {
+router.get('/divisions/:province/:comarca', (req, res) => {
   const province = levelsRepository.findById(req.params.province);
   const comarca = province.findSubLevelById(req.params.comarca);
 

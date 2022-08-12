@@ -3,7 +3,50 @@ info:
   title: Galiza Admin Boundaries
   description: Galiza Admin Boundaries
   version: 1.0.0
+
 servers:
   - url: 'https://admin-levels-gz-luobwhahnq-nw.a.run.app'
-paths:
 
+paths:
+  /divisions/{ineCode}:
+    get:
+      summary: Get a division by INE code
+      parameters:
+        - in: path
+          name: ineCode
+          schema:
+            type: integer
+          required: true
+          description: INE code
+      responses:
+        '200':
+          description: Administrative division
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminDivision'
+
+  /provincias:
+    get:
+      summary: Get the list of provincias
+      responses:
+        '200':
+          description: Administrative division
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdminDivision'
+
+components:
+  schemas:
+    AdminDivision:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        type:
+          type: string
