@@ -39,3 +39,11 @@ Comando usando yarn.
 ```shell
 yarn --silent shapefiles-extract -e path/to/entidates_shapefiles -p path/to/parroquias_shapefiles
 ```
+
+### Lanzar a applicacion en local
+
+```shell
+yarn start-prod
+```
+
+A application sera acesibel polo porto 9000

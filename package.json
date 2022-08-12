@@ -11,6 +11,7 @@
     "restart": "docker kill admin-levels-gz-dev && docker build --tag administrative-levels-gz:latest . && docker run -d -p 9000:9000 --env DATA_LEVELS_PATH=\"../at-levels.json\" --rm --name admin-levels-gz-dev administrative-levels-gz:latest",
     "shapefiles-extract": "node src/application/cli/shapefiles",
     "start": "docker build --tag administrative-levels-gz:latest . && docker run -d --rm -p 9000:9000 --env DATA_LEVELS_PATH=\"../at-levels.json\" --name admin-levels-gz-dev administrative-levels-gz:latest",
+    "start-prod": "docker build --tag administrative-levels-gz:latest . && docker run -d --rm -p 9000:9000 --env DATA_LEVELS_PATH=\"../levels.json\" --name admin-levels-gz-dev administrative-levels-gz:latest",
     "stop": "docker kill admin-levels-gz-dev",
     "test": "jest __test__"
   },
