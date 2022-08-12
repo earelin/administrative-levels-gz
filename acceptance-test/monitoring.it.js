@@ -1,12 +1,10 @@
-const pactum = require('pactum');
+const request = require('supertest')(TEST_BASE_URL);
 
 describe('Microservice observability', () => {
   it('Healthcheck', async () => {
-    return pactum.spec()
-      .get(`${TEST_BASE_URL}/health`)
-      .expectStatus(200)
-      .expectJsonLike({
-        "status": "OK"
-      });
+    const response = await request.get('/health');
+
+    expect(response.statusCode)
+      .toBe(200);
   })
 });

@@ -1,11 +1,13 @@
-const pactum = require('pactum');
+const request = require('supertest')(TEST_BASE_URL);
 
 describe('Provinces', () => {
   it('Should return list', async () => {
-    return pactum.spec()
-      .get(`${TEST_BASE_URL}/levels`)
-      .expectStatus(200)
-      .expectBody([{
+    const response = await request.get('/levels');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual([{
         id: '15',
         name: 'A Coruña',
         alternativeNames: [],
@@ -19,10 +21,12 @@ describe('Provinces', () => {
   });
 
   it('Should return province data', async () => {
-    return pactum.spec()
-      .get(`${TEST_BASE_URL}/levels/27`)
-      .expectStatus(200)
-      .expectBody({
+    const response = await request.get('/levels/27');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual({
         id: '27',
         name: 'Lugo',
         alternativeNames: [],
@@ -37,10 +41,12 @@ describe('Provinces', () => {
   });
 
   it('Should return comarca data', async () => {
-    return pactum.spec()
-      .get(`${TEST_BASE_URL}/levels/15/2`)
-      .expectStatus(200)
-      .expectBody({
+    const response = await request.get('/levels/15/2');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual({
         id: '2',
         name: 'A Coruña',
         alternativeNames: [],
@@ -55,10 +61,12 @@ describe('Provinces', () => {
   });
 
   it('Should return concello data', async () => {
-    return pactum.spec()
-      .get(`${TEST_BASE_URL}/levels/15/2/15008`)
-      .expectStatus(200)
-      .expectBody({
+    const response = await request.get('/levels/15/2/15008');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual({
         id: '15008',
         name: 'Bergondo',
         type: 'Concello',
@@ -73,10 +81,12 @@ describe('Provinces', () => {
   });
 
   it('Should return parroquia data', async () => {
-    return pactum.spec()
-      .get(`${TEST_BASE_URL}/levels/15/2/15008/1500809`)
-      .expectStatus(200)
-      .expectBody({
+    const response = await request.get('/levels/15/2/15008/1500809');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual({
         id: '1500809',
         name: 'Vixoi',
         alternativeNames: ['San Fiz'],
@@ -91,10 +101,12 @@ describe('Provinces', () => {
   });
 
   it('Should return poboacion data', async () => {
-    return pactum.spec()
-      .get(`${TEST_BASE_URL}/levels/15/2/15008/1500809/150080902`)
-      .expectStatus(200)
-      .expectBody({
+    const response = await request.get('/levels/15/2/15008/1500809/150080902');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual({
         id: '150080902',
         name: 'Pisón',
         alternativeNames: [],
