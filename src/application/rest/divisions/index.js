@@ -14,9 +14,8 @@ router.get('/divisions/:ineCode', (req, res) => {
   res.send(mapLevelSubTreeToDao(level));
 });
 
-router.get('/divisions/:province/:comarca', (req, res) => {
-  const province = levelsRepository.findById(req.params.province);
-  const comarca = province.findSubLevelById(req.params.comarca);
+router.get('/comarcas/:comarca', (req, res) => {
+  const comarca = levelsIndex.findComarcaById(req.params.comarca);
 
   res.send(mapLevelSubTreeToDao(comarca));
 });
@@ -26,8 +25,7 @@ function mapLevelToDao(level) {
     id: level.id,
     name: level.name,
     alternativeNames: Array.from(level.alternativeNames),
-    type: levelTypeToString(level.type),
-    geometry: level.geometry
+    type: levelTypeToString(level.type)
   }
 }
 

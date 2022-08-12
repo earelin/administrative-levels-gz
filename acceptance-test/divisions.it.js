@@ -41,7 +41,7 @@ describe('Divisions endoints', () => {
   });
 
   it('Should return comarca data', async () => {
-    const response = await request.get('/divisions/15/2');
+    const response = await request.get('/comarcas/2');
 
     expect(response.statusCode)
       .toBe(200);
