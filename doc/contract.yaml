@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Galiza Admin Boundaries
+  title: Limites Administrativos de Galiza
   description: Galiza Admin Boundaries
   version: 1.0.0
 
@@ -10,7 +10,7 @@ servers:
 paths:
   /divisions/{ineCode}:
     get:
-      summary: Get a division by INE code
+      summary: Obter unha division administrativa por código INE
       parameters:
         - in: path
           name: ineCode
@@ -26,18 +26,73 @@ paths:
               schema:
                 $ref: '#/components/schemas/AdminDivision'
 
-  /provincias:
+  /divisions/{ineCode}/{subDivision}:
     get:
-      summary: Get the list of provincias
+      summary: Obter subdivions dunha division administrativa
+      parameters:
+        - in: path
+          name: ineCode
+          schema:
+            type: integer
+          required: true
+          description: INE code
+        - in: path
+          name: subDivision
+          schema:
+            type: string
+          required: true
+          description: Subdivisiones administrativas
       responses:
         '200':
           description: Administrative division
           content:
             application/json:
               schema:
+                $ref: '#/components/schemas/AdminDivision'
+
+  /provincias:
+    get:
+      summary: Todas as provincias
+      responses:
+        '200':
+          description: Provincias
+          content:
+            application/json:
+              schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/AdminDivision'
+
+  /comarcas:
+    get:
+      summary: Todas as comarcas
+      responses:
+        '200':
+          description: Comarcas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdminDivision'
+
+  /comarcas/{idComarca}:
+    get:
+      summary: Obter unha division administrativa por código INE
+      parameters:
+        - in: path
+          name: idComarca
+          schema:
+            type: integer
+          required: true
+          description: Código de comarca
+      responses:
+        '200':
+          description: Comarca
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminDivision'
 
 components:
   schemas:
