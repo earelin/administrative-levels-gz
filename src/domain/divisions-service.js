@@ -1,12 +1,12 @@
 const {isLowerLevelOf} = require('./admin-levels');
 
 class DivisionsService {
-  constructor(divisionsRepository) {
-    this.divisionsRepository = divisionsRepository;
+  constructor(levelsIndex) {
+    this.levelsIndex = levelsIndex;
   }
 
   findSubdivisionsOf(divisionId, subdivisionType) {
-    const division = this.divisionsRepository.findById(divisionId);
+    const division = this.levelsIndex.findByIneCode(divisionId);
 
     if (isLowerLevelOf(division.type, subdivisionType)) {
       return getSubLevelsOf(division, subdivisionType);
