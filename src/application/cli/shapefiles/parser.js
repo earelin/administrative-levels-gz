@@ -64,7 +64,8 @@ async function processPoboacionsShapefile(shapefilePath) {
         properties.COD_INE9,
         sanitizedName,
         AdminDivisionTypes.Poboacion,
-        alternativeNames);
+        alternativeNames,
+        result.value.geometry);
 
       if (parroquiasPoboacions.has(poboacionTree.parroquia)) {
         const parroquiaPoboacions = parroquiasPoboacions.get(poboacionTree.parroquia);

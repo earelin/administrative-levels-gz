@@ -22,12 +22,14 @@ describe('Levels repository tests', () => {
         name: 'A Regueira',
         alternativeNames: [],
         type: 'Provincia',
+        geometry: null,
         subLevels: [],
       }, {
         id: '8',
         name: 'O Souto',
         alternativeNames: [],
         type: 'Provincia',
+        geometry: null,
         subLevels: [],
       }]);
   });

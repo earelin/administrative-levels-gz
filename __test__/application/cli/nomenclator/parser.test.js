@@ -10,27 +10,32 @@ describe('Nomenclator parser', () => {
         name: 'A Coruña',
         alternativeNames: [],
         type: 'Unknown',
+        geometry: null,
         subLevels: [{
           id: '15001',
           name: 'Abegondo',
           alternativeNames: [],
           type: 'Unknown',
+          geometry: null,
           subLevels: [{
             id: '1500102',
             name: 'Cabanas (San Xián)',
             alternativeNames: [],
             type: 'Unknown',
+            geometry: null,
             subLevels: [{
               id: '6',
               name: 'A Regueira',
               alternativeNames: [],
               type: 'Unknown',
+              geometry: null,
               subLevels: []
             }, {
               id: '8',
               name: 'O Souto',
               alternativeNames: [],
               type: 'Unknown',
+              geometry: null,
               subLevels: []
             }]
           }, {
@@ -38,11 +43,13 @@ describe('Nomenclator parser', () => {
             name: 'Leiro (Santaia)',
             alternativeNames: [],
             type: 'Unknown',
+            geometry: null,
             subLevels: [{
               id: '19',
               name: 'Soutelos',
               alternativeNames: [],
               type: 'Unknown',
+              geometry: null,
               subLevels: []
             }]
           }]
@@ -51,16 +58,19 @@ describe('Nomenclator parser', () => {
           name: 'Aranga',
           alternativeNames: [],
           type: 'Unknown',
+          geometry: null,
           subLevels: [{
             id: '1500301',
             name: 'Aranga (San Paio)',
             alternativeNames: [],
             type: 'Unknown',
+            geometry: null,
             subLevels: [{
               id: '7',
               name: 'Congostro',
               alternativeNames: [],
               type: 'Unknown',
+              geometry: null,
               subLevels: []
             }]
           }]
@@ -70,21 +80,25 @@ describe('Nomenclator parser', () => {
         name: 'Lugo',
         alternativeNames: [],
         type: 'Unknown',
+        geometry: null,
         subLevels: [{
           id: '27010',
           name: 'Castro De Rei',
           alternativeNames: [],
           type: 'Unknown',
+          geometry: null,
           subLevels: [{
             id: '2701008',
             name: 'Duancos (Santa María)',
             alternativeNames: [],
             type: 'Unknown',
+            geometry: null,
             subLevels: [{
               id: '7',
               name: 'A Torre',
               alternativeNames: [],
               type: 'Unknown',
+              geometry: null,
               subLevels: []
             }]
           }]
@@ -94,21 +108,25 @@ describe('Nomenclator parser', () => {
         name: 'Ourense',
         alternativeNames: [],
         type: 'Unknown',
+        geometry: null,
         subLevels: [{
           id: '32026',
           name: 'Coles',
           alternativeNames: [],
           type: 'Unknown',
+          geometry: null,
           subLevels: [{
             id: '3202603',
             name: 'A Barra (Santa María)',
             alternativeNames: [],
             type: 'Unknown',
+            geometry: null,
             subLevels: [{
               id: '8',
               name: 'Vilanova',
               alternativeNames: [],
               type: 'Unknown',
+              geometry: null,
               subLevels: []
             }]
           }]

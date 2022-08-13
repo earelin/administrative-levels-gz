@@ -56,6 +56,7 @@ class AdminDivision extends AdminDivisionsAggregator {
       name: this.name,
       alternativeNames: Array.from(this.alternativeNames),
       type: levelTypeToString(this.type),
+      geometry: this.geometry,
       subLevels: super.toJSON()
     };
   }

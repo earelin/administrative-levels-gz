@@ -51,6 +51,7 @@ describe('Political divisions', () => {
           name: PROVINCE_NAME,
           type: 'Provincia',
           alternativeNames: [],
+          geometry: null,
           subLevels: []
         }]);
     });
@@ -102,11 +103,13 @@ describe('Political divisions', () => {
           name: PROVINCE_NAME,
           type: 'Provincia',
           alternativeNames: [],
+          geometry: null,
           subLevels: [{
             id: '20',
             name: 'Santiago',
             alternativeNames: [],
             type: 'Comarca',
+            geometry: null,
             subLevels: []
           }]
         })
