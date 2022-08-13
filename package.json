@@ -2,10 +2,11 @@
   "name": "adminstrative-levels-gz",
   "version": "1.0.0",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "acceptance-test": "jest acceptance-test",
     "build": "docker build --tag administrative-levels-gz:latest .",
-    "dev": "DATA_LEVELS_PATH=../../acceptance-test/data/at-levels.json nodemon src/application/rest/index.js",
+    "dev": "DATA_LEVELS_PATH=./acceptance-test/data/at-levels.json nodemon src/application/rest/index.js",
     "lint": "eslint src/**/*.js __test__/**/*.js",
     "nomenclator-extract": "node src/application/cli/nomenclator",
     "restart": "docker kill admin-levels-gz-dev && docker build --tag administrative-levels-gz:latest . && docker run -d -p 9000:9000 --env DATA_LEVELS_PATH=\"../at-levels.json\" --rm --name admin-levels-gz-dev administrative-levels-gz:latest",

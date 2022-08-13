@@ -1,7 +1,8 @@
-const express = require('express');
+import express from 'express';
+import {levelsIndex, levelsRepository} from '../../../domain/index.js';
+import {levelTypeToString} from '../../../domain/admin-levels.js';
+
 const router = express.Router();
-const {levelsIndex, levelsRepository} = require('../../../domain');
-const {levelTypeToString} = require('../../../domain/admin-levels');
 
 router.get('/comarcas', (req, res) => {
   const comarcas = levelsIndex.findAllComarcas();
@@ -52,4 +53,4 @@ function mapSubLevelsToDao(level) {
     .map(subLevel => mapLevelToDao(subLevel));
 }
 
-module.exports = router;
+export default router;

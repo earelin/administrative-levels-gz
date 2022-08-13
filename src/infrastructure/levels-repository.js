@@ -1,4 +1,4 @@
-const {AdminLevel, LevelTypes} = require('../domain/admin-levels');
+import {AdminLevel, LevelTypes} from '../domain/admin-levels.js';
 
 class LevelsRepository {
 
@@ -22,4 +22,4 @@ class LevelsRepository {
   }
 }
 
-module.exports = LevelsRepository;
+export default LevelsRepository;

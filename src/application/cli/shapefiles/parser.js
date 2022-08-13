@@ -1,6 +1,6 @@
-const {AdminLevel, AdminLevelAggregator, LevelTypes} = require('../../../domain/admin-levels');
-const shapefile = require('shapefile');
-const {extractIneCodeComponents} = require('../../../string-utils');
+import {AdminLevel, AdminLevelAggregator, LevelTypes} from '../../../domain/admin-levels';
+import shapefile from 'shapefile';
+import {extractIneCodeComponents} from '../../../string-utils';
 
 async function shapefilesParser(parroquiasShapefilePath, poboacionsShapefilePath) {
   const poboacions = await processPoboacionsShapefile(poboacionsShapefilePath);
@@ -109,4 +109,4 @@ async function openShapefile(path) {
     `${path}.shp`,`${path}.dbf`, {encoding: 'UTF-8'});
 }
 
-module.exports = shapefilesParser;
+export default shapefilesParser;

@@ -1,6 +1,1 @@
-const {levelsIndex, levelsRepository} = require('../infrastructure');
-
-module.exports = {
-  levelsIndex,
-  levelsRepository
-};
+export {levelsIndex, levelsRepository} from '../infrastructure/index.js';

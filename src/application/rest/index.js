@@ -1,9 +1,10 @@
-const express = require('express');
-const app = express();
-const monitoring = require('./monitoring');
-const divisions = require('./divisions');
+import express from 'express';
+import monitoring from './monitoring/index.js';
+import divisions from './divisions/index.js';
 
 const PORT = 9000;
+
+const app = express();
 
 app.use('/', monitoring);
 app.use('/', divisions);
