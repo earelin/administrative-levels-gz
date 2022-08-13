@@ -23,6 +23,12 @@ router.get('/comarcas', (req, res) => {
   res.send(comarcas.map(comarca => mapLevelToDao(comarca)));
 });
 
+router.get('/divisions/:ineCode/geometry', (req, res) => {
+  const level = levelsIndex.findByIneCode(req.params.ineCode);
+
+  res.send(adaptLevelToGeometryDao(level));
+});
+
 router.get('/divisions/:ineCode/:division', (req, res) => {
   const subDivisionType = divisionToEnum[req.params.division];
   const subDivisions = divisionsService.findSubdivisionsOf(req.params.ineCode, subDivisionType);
@@ -57,6 +63,18 @@ function mapLevelSubTreeToDao(level) {
 
 function mapLevelsToDao(levels) {
   return levels.map(level => mapLevelToDao(level));
+}
+
+function adaptLevelToGeometryDao(level) {
+  return {
+    type: 'Feature',
+    geometry: level.geometry,
+    properties: {
+      id: level.id,
+      name: level.name,
+      alternativeNames: Array.from(level.alternativeNames)
+    }
+  }
 }
 
 module.exports = router;

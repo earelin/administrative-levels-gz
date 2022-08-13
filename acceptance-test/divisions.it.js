@@ -151,4 +151,21 @@ describe('Divisions endoints', () => {
         type: 'Concello'
       }]);
   });
+
+  it('Should return geometry of a admin division', async () => {
+    const response = await request.get('/divisions/15/geometry');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual({
+        type: 'Feature',
+        geometry: expect.anything(),
+        properties: {
+          id: '15',
+          name: 'A Coruña',
+          alternativeNames: []
+        }
+      });
+  });
 });
