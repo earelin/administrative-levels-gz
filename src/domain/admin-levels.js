@@ -82,6 +82,11 @@ function lowerLevelOf(parent) {
   return null;
 }
 
+function isLowerLevelOf(parentLevelType, levelType) {
+  return (levelTypesOrder.indexOf(levelType)
+    - levelTypesOrder.indexOf(parentLevelType)) > 0;
+}
+
 const levelTypeStringMapping = new Map();
 levelTypeStringMapping.set(LevelTypes.Provincia, "Provincia");
 levelTypeStringMapping.set(LevelTypes.Comarca, "Comarca");
@@ -99,5 +104,6 @@ module.exports = {
   AdminLevel,
   LevelTypes,
   lowerLevelOf,
-  levelTypeToString
+  levelTypeToString,
+  isLowerLevelOf
 };
