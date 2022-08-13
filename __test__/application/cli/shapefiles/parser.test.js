@@ -5,6 +5,7 @@ describe('Shapefile parser', () => {
     const shapefileParser = new ShapefilesParser(
       './__test__/data/provincias-test',
       './__test__/data/comarcas-test',
+      './__test__/data/concellos-test',
       './__test__/data/parroquias-test',
       './__test__/data/poboacions-test');
 
@@ -28,7 +29,7 @@ describe('Shapefile parser', () => {
             name: 'Bergondo',
             alternativeNames: [],
             type: 'Concello',
-            geometry: null,
+            geometry: expect.anything(),
             subLevels: [{
               id: '1500809',
               name: 'Vixoi',
@@ -56,7 +57,7 @@ describe('Shapefile parser', () => {
             name: 'Teo',
             alternativeNames: [],
             type: 'Concello',
-            geometry: null,
+            geometry: expect.anything(),
             subLevels: [{
               id: '1508201',
               name: 'Cacheiras',
@@ -112,7 +113,7 @@ describe('Shapefile parser', () => {
             name: 'Baleira',
             alternativeNames: [],
             type: 'Concello',
-            geometry: null,
+            geometry: expect.anything(),
             subLevels: [{
               id: '2700405',
               name: 'A Esperela',

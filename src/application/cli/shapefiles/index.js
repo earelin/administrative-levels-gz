@@ -13,9 +13,9 @@ const argv = require('yargs')
     describe: 'Comarcas shapefiles path (no extension)',
     demandOption: true
   })
-  .option('entidades', {
-    alias: 'e',
-    describe: 'Entidades de poboacion shapefiles path (no extension)',
+  .option('concellos', {
+    alias: 'o',
+    describe: 'Concellos shapefiles path (no extension)',
     demandOption: true
   })
   .option('parroquias', {
@@ -23,9 +23,19 @@ const argv = require('yargs')
     describe: 'Parroquias shapefiles path (no extension)',
     demandOption: true
   })
+  .option('entidades', {
+    alias: 'e',
+    describe: 'Entidades de poboacion shapefiles path (no extension)',
+    demandOption: true
+  })
   .help()
   .argv;
 
-const shapefileParser = new ShapefilesParser(argv.provincias, argv.comarcas, argv.parroquias, argv.entidades);
+const shapefileParser = new ShapefilesParser(
+  argv.provincias,
+  argv.comarcas,
+  argv.concellos,
+  argv.parroquias,
+  argv.entidades);
 shapefileParser.parse()
   .then(result => console.log(JSON.stringify(result)));

@@ -3,9 +3,10 @@ const shapefile = require('shapefile');
 const {extractIneCodeComponents} = require('../../../string-utils');
 
 class ShapefilesParser {
-  constructor(provinciasShapefilePath, comarcasShapefilePath, parroquiasShapefilePath, poboacionsShapefilePath) {
+  constructor(provinciasShapefilePath, comarcasShapefilePath, concellosShapefilePath, parroquiasShapefilePath, poboacionsShapefilePath) {
     this.provinciasShapefilePath = provinciasShapefilePath;
     this.comarcasShapefilePath = comarcasShapefilePath;
+    this.concellosShapefilePath = concellosShapefilePath;
     this.parroquiasShapefilePath = parroquiasShapefilePath;
     this.poboacionsShapefilePath = poboacionsShapefilePath;
   }
@@ -19,7 +20,8 @@ class ShapefilesParser {
   async #extractGeoInfo() {
     return  {
       provincias: await extractGeoInformation(this.provinciasShapefilePath, 'CodPROV'),
-      comarcas: await extractGeoInformation(this.comarcasShapefilePath, 'CodCOM')
+      comarcas: await extractGeoInformation(this.comarcasShapefilePath, 'CodCOM'),
+      concellos: await extractGeoInformation(this.concellosShapefilePath, 'CodCONC')
     };
   }
 
@@ -57,6 +59,7 @@ class ShapefilesParser {
           properties.CodCONC,
           properties.Concello,
           AdminDivisionTypes.Concello);
+        concello.geometry = this.geoInfo.concellos.get(concello.id);
 
         const parroquia = addLevelToParent(
           concello,
