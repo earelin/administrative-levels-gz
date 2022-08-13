@@ -1,4 +1,4 @@
-const _ = require('lodash');
+i mport _ from 'lodash';
 
 function capitalizeWords(string) {
   return string.toLocaleLowerCase()

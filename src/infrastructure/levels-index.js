@@ -1,4 +1,4 @@
-const {LevelTypes} = require('../domain/admin-levels');
+import {LevelTypes} from '../domain/admin-levels.js';
 
 class LevelsIndex {
   constructor(repository) {
@@ -32,4 +32,4 @@ function indexTree(index, comarcasIndex, tree) {
   }
 }
 
-module.exports = LevelsIndex;
+export default LevelsIndex;

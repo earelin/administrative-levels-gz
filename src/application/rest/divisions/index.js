@@ -1,7 +1,8 @@
 const express = require('express');
-const router = express.Router();
 const {levelsIndex, levelsRepository, divisionsService} = require('../../../domain');
 const {levelTypeToString, LevelTypes} = require('../../../domain/admin-levels');
+
+const router = express.Router();
 
 const divisionToEnum = {
   comarcas: LevelTypes.Comarca,

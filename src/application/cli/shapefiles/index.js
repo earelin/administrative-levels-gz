@@ -1,4 +1,4 @@
-const shapefilesParser = require('./parser');
+import shapefilesParser from './parser';
 
 const argv = require('yargs')
   .scriptName("shapefile-extract")
