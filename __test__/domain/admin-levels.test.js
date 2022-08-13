@@ -5,6 +5,12 @@ describe('Political divisions', () => {
   const PROVINCE_ID = '15';
   const PROVINCE_NAME = 'A Coruña';
   const PROVINCE_TYPE = AdminDivisionTypes.Provincia;
+  const PROVINCE_ALTERNATIVE_NAMES = ['Name A', 'Name B'];
+  const PROVINCE_GEOMETRY = {
+    type: 'Point',
+    coordinates: [45.7, 50.34]
+  };
+
   const LEVELS = [{
     id: PROVINCE_ID,
     name: PROVINCE_NAME,
@@ -68,9 +74,10 @@ describe('Political divisions', () => {
   });
 
   describe('Administrative Level', () => {
-
     test('Should set properties on creation', () => {
-      const province = new AdminDivision(PROVINCE_ID, PROVINCE_NAME, PROVINCE_TYPE);
+
+      const province = new AdminDivision(PROVINCE_ID, PROVINCE_NAME,
+        PROVINCE_TYPE, PROVINCE_ALTERNATIVE_NAMES, PROVINCE_GEOMETRY);
 
       expect(province.id)
         .toBe(PROVINCE_ID);
@@ -78,6 +85,10 @@ describe('Political divisions', () => {
         .toBe(PROVINCE_NAME);
       expect(province.type)
         .toBe(PROVINCE_TYPE);
+      expect(province.alternativeNames)
+        .toContain(...PROVINCE_ALTERNATIVE_NAMES);
+      expect(province.geometry)
+        .toBe(PROVINCE_GEOMETRY);
     });
 
     test('Should create from raw data', () => {

@@ -37,12 +37,17 @@ class AdminDivision extends AdminDivisionsAggregator {
     return adminLevel;
   }
 
-  constructor(id, name, type = AdminDivisionTypes.Unknown, alternativeNames = []) {
+  constructor(id,
+              name,
+              type = AdminDivisionTypes.Unknown,
+              alternativeNames = [],
+              geometry = null) {
     super();
     this.id = id;
     this.name = name;
     this.type = type;
-    this.alternativeNames = new Set(alternativeNames)
+    this.alternativeNames = new Set(alternativeNames);
+    this.geometry = geometry;
   }
 
   toJSON() {
