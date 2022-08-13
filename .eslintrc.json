@@ -3,9 +3,6 @@
     "node": true,
     "es2022": true
   },
-  "parserOptions": {
-    "sourceType": "module"
-  },
   "extends": "eslint:recommended",
   "overrides": [{
     "files": ["__test__/**", "acceptance-test/**"],

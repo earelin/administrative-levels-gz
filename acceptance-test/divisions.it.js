@@ -132,4 +132,23 @@ describe('Divisions endoints', () => {
         type: 'Comarca'
       }]);
   });
+
+  it('Should return concellos of a province', async () => {
+    const response = await request.get('/divisions/15/concellos');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual([{
+        id: '15008',
+        name: 'Bergondo',
+        alternativeNames: [],
+        type: 'Concello'
+      }, {
+        id: '15082',
+        name: 'Teo',
+        alternativeNames: [],
+        type: 'Concello'
+      }]);
+  });
 });

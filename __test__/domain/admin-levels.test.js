@@ -1,4 +1,4 @@
-const {AdminLevel, AdminLevelAggregator, LevelTypes, lowerLevelOf, levelTypeToString} = require('../../src/domain/admin-levels');
+const {AdminLevel, AdminLevelAggregator, LevelTypes, lowerLevelOf, levelTypeToString, isLowerLevelOf} = require('../../src/domain/admin-levels');
 
 describe('Political divisions', () => {
 
@@ -127,6 +127,15 @@ describe('Political divisions', () => {
     ])('Type to string of %s: %s', (current, next) => {
       expect(levelTypeToString(current))
         .toBe(next);
+    })
+
+    test.each([
+      [LevelTypes.Provincia, LevelTypes.Comarca, true],
+      [LevelTypes.Concello, LevelTypes.Comarca, false],
+      [LevelTypes.Parroquia, LevelTypes.Parroquia, false]
+    ])('%s is second lower: %s', (parent, lower, expected) => {
+      expect(isLowerLevelOf(parent, lower))
+        .toBe(expected);
     })
   })
 });

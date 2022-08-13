@@ -2,7 +2,6 @@
   "name": "adminstrative-levels-gz",
   "version": "1.0.0",
   "license": "MIT",
-  "type": "module",
   "scripts": {
     "acceptance-test": "jest acceptance-test",
     "build": "docker build --tag administrative-levels-gz:latest .",
