@@ -15,7 +15,7 @@ describe('Divisions service', () => {
 
   beforeEach(() => {
     const divisionRepository = {
-      findById() {
+      findByIneCode() {
         return PROVINCE;
       }
     };
