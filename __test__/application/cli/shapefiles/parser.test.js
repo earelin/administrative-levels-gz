@@ -1,10 +1,14 @@
-const shapefilesParser = require('../../../../src/application/cli/shapefiles/parser');
+const ShapefilesParser = require('../../../../src/application/cli/shapefiles/parser');
 
 describe('Shapefile parser', () => {
   test('Should extract admin levels', async () => {
-    const divisions = await shapefilesParser(
+    const shapefileParser = new ShapefilesParser(
+      './__test__/data/provincias-test',
+      './__test__/data/comarcas-test',
       './__test__/data/parroquias-test',
       './__test__/data/poboacions-test');
+
+    const divisions = await shapefileParser.parse();
 
     expect(divisions.toJSON())
       .toEqual([{
@@ -12,13 +16,13 @@ describe('Shapefile parser', () => {
         name: 'A Coruña',
         alternativeNames: [],
         type: 'Provincia',
-        geometry: null,
+        geometry: expect.anything(),
         subLevels: [{
           id: '2',
           name: 'A Coruña',
           alternativeNames: [],
           type: 'Comarca',
-          geometry: null,
+          geometry: expect.anything(),
           subLevels: [{
             id: '15008',
             name: 'Bergondo',
@@ -46,7 +50,7 @@ describe('Shapefile parser', () => {
           name: 'Santiago',
           alternativeNames: [],
           type: 'Comarca',
-          geometry: null,
+          geometry: expect.anything(),
           subLevels: [{
             id: '15082',
             name: 'Teo',
@@ -96,13 +100,13 @@ describe('Shapefile parser', () => {
         name: 'Lugo',
         alternativeNames: [],
         type: 'Provincia',
-        geometry: null,
+        geometry: expect.anything(),
         subLevels: [{
           id: '19',
           name: 'A Fonsagrada',
           alternativeNames: [],
           type: 'Comarca',
-          geometry: null,
+          geometry: expect.anything(),
           subLevels: [{
             id: '27004',
             name: 'Baleira',

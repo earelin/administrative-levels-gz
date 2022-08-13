@@ -2,51 +2,94 @@ const {AdminDivision, AdminDivisionsAggregator, AdminDivisionTypes} = require('.
 const shapefile = require('shapefile');
 const {extractIneCodeComponents} = require('../../../string-utils');
 
-async function shapefilesParser(parroquiasShapefilePath, poboacionsShapefilePath) {
-  const poboacions = await processPoboacionsShapefile(poboacionsShapefilePath);
+class ShapefilesParser {
+  constructor(provinciasShapefilePath, comarcasShapefilePath, parroquiasShapefilePath, poboacionsShapefilePath) {
+    this.provinciasShapefilePath = provinciasShapefilePath;
+    this.comarcasShapefilePath = comarcasShapefilePath;
+    this.parroquiasShapefilePath = parroquiasShapefilePath;
+    this.poboacionsShapefilePath = poboacionsShapefilePath;
+  }
 
-  const adminLevels = new AdminDivisionsAggregator();
-  await processParroquiasShapefile(poboacions, parroquiasShapefilePath, adminLevels);
+  async parse() {
+    this.geoInfo = await this.#extractGeoInfo();
+    this.geoInfo.poboacions = await this.#extractPoboacions();
+    return await this.#processParroquiasShapefile();
+  }
 
-  return adminLevels;
+  async #extractGeoInfo() {
+    return  {
+      provincias: await extractGeoInformation(this.provinciasShapefilePath, 'CodPROV'),
+      comarcas: await extractGeoInformation(this.comarcasShapefilePath, 'CodCOM')
+    };
+  }
+
+  async #extractPoboacions() {
+    return processPoboacionsShapefile(this.poboacionsShapefilePath);
+  }
+
+  async #processParroquiasShapefile() {
+    const adminDivisions = new AdminDivisionsAggregator();
+
+    const source = await openShapefile(this.parroquiasShapefilePath);
+
+    let result;
+    do {
+      result = await source.read();
+      if (!result.done) {
+        const properties = result.value.properties;
+
+        const province = addLevelToParent(
+          adminDivisions,
+          properties.CodPROV,
+          properties.Provincia,
+          AdminDivisionTypes.Provincia);
+        province.geometry = this.geoInfo.provincias.get(province.id);
+
+        const comarca = addLevelToParent(
+          province,
+          properties.CodCOM,
+          properties.Comarca,
+          AdminDivisionTypes.Comarca);
+        comarca.geometry = this.geoInfo.comarcas.get(comarca.id);
+
+        const concello = addLevelToParent(
+          comarca,
+          properties.CodCONC,
+          properties.Concello,
+          AdminDivisionTypes.Concello);
+
+        const parroquia = addLevelToParent(
+          concello,
+          properties.CodPARRO,
+          properties.Parroquia,
+          AdminDivisionTypes.Parroquia);
+        parroquia.geometry = result.value.geometry;
+
+        this.geoInfo.poboacions.get(parroquia.id)
+          ?.forEach(poboacion => parroquia.addSubLevel(poboacion));
+      }
+    } while (!result.done);
+
+    return adminDivisions;
+  }
 }
 
-async function processParroquiasShapefile(poboacions, shapefilePath, adminLevels) {
+async function extractGeoInformation(shapefilePath, key) {
   const source = await openShapefile(shapefilePath);
+
+  const geoInfo = new Map();
 
   let result;
   do {
     result = await source.read();
     if (!result.done) {
-      const properties = result.value.properties;
-
-      const province = addLevelToParent(
-        adminLevels,
-        properties.CodPROV,
-        properties.Provincia,
-        AdminDivisionTypes.Provincia);
-      const comarca = addLevelToParent(
-        province,
-        properties.CodCOM,
-        properties.Comarca,
-        AdminDivisionTypes.Comarca);
-      const concello = addLevelToParent(
-        comarca,
-        properties.CodCONC,
-        properties.Concello,
-        AdminDivisionTypes.Concello);
-
-      const parroquia = addLevelToParent(
-        concello,
-        properties.CodPARRO,
-        properties.Parroquia,
-        AdminDivisionTypes.Parroquia);
-      parroquia.geometry = result.value.geometry;
-
-      poboacions.get(parroquia.id)
-        ?.forEach(poboacion => parroquia.addSubLevel(poboacion));
+      const id = String(result.value.properties[key]);
+      const geo = result.value.geometry;
+      geoInfo.set(id, geo);
     }
   } while (!result.done);
+
+  return geoInfo;
 }
 
 async function processPoboacionsShapefile(shapefilePath) {
@@ -112,4 +155,4 @@ async function openShapefile(path) {
     `${path}.shp`,`${path}.dbf`, {encoding: 'UTF-8'});
 }
 
-module.exports = shapefilesParser;
+module.exports = ShapefilesParser;
