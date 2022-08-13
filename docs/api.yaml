@@ -33,7 +33,7 @@ paths:
           description: Código de comarca
       responses:
         '200':
-          description: Comarca
+          description: Array con todas as comarcas
           content:
             application/json:
               schema:
@@ -48,7 +48,7 @@ paths:
           schema:
             type: integer
           required: true
-          description: INE code
+          description: Código INE
       responses:
         '200':
           description: Administrative division
@@ -66,20 +66,23 @@ paths:
           schema:
             type: integer
           required: true
-          description: INE code
+          description: Código INE
         - in: path
           name: subDivision
           schema:
             type: string
+            enum: [comarcas, concellos, parroquias, poboacions]
           required: true
-          description: Subdivisiones administrativas
+          description: Subdivision administrativa
       responses:
         '200':
-          description: Administrative division
+          description: Listado de subdivisiones administrativas
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AdminDivision'
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdminDivision'
 
   /provincias:
     get:

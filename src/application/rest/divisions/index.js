@@ -21,6 +21,12 @@ router.get('/divisions/:ineCode', (req, res) => {
   res.send(mapLevelSubTreeToDao(level));
 });
 
+router.get('/divisions/:ineCode/comarcas', (req, res) => {
+  const province = levelsIndex.findByIneCode(req.params.ineCode);
+
+  res.send(mapSubLevelsToDao(province));
+});
+
 router.get('/provincias', (req, res) => {
   res.send(levelsRepository.findAll()
     .map(province => mapLevelToDao(province)));
@@ -39,6 +45,11 @@ function mapLevelSubTreeToDao(level) {
   return {
     ...mapLevelToDao(level)
   }
+}
+
+function mapSubLevelsToDao(level) {
+  return level.getSubLevelsAsArray()
+    .map(subLevel => mapLevelToDao(subLevel));
 }
 
 module.exports = router;

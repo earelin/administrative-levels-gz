@@ -1,7 +1,7 @@
 const request = require('supertest')(TEST_BASE_URL);
 
 describe('Divisions endoints', () => {
-  it('Should return list', async () => {
+  it('Should return all provinces', async () => {
     const response = await request.get('/provincias');
 
     expect(response.statusCode)
@@ -112,5 +112,24 @@ describe('Divisions endoints', () => {
         alternativeNames: [],
         type: 'Poboacion'
       });
+  });
+
+  it('Should return comarcas of a province', async () => {
+    const response = await request.get('/divisions/15/comarcas');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual([{
+        id: '2',
+        name: 'A Coruña',
+        alternativeNames: [],
+        type: 'Comarca'
+      }, {
+        id: '15',
+        name: 'Santiago',
+        alternativeNames: [],
+        type: 'Comarca'
+      }]);
   });
 });
