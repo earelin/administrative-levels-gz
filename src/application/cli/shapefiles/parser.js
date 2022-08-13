@@ -35,11 +35,13 @@ async function processParroquiasShapefile(poboacions, shapefilePath, adminLevels
         properties.CodCONC,
         properties.Concello,
         AdminDivisionTypes.Concello);
+
       const parroquia = addLevelToParent(
         concello,
         properties.CodPARRO,
         properties.Parroquia,
         AdminDivisionTypes.Parroquia);
+      parroquia.geometry = result.value.geometry;
 
       poboacions.get(parroquia.id)
         ?.forEach(poboacion => parroquia.addSubLevel(poboacion));

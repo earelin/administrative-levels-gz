@@ -30,7 +30,7 @@ describe('Shapefile parser', () => {
               name: 'Vixoi',
               alternativeNames: ['San Fiz'],
               type: 'Parroquia',
-              geometry: null,
+              geometry: expect.anything(),
               subLevels: [{
                 id: '150080902',
                 name: 'Pisón',
@@ -58,7 +58,7 @@ describe('Shapefile parser', () => {
               name: 'Cacheiras',
               alternativeNames: ['San Simón de Ons'],
               type: 'Parroquia',
-              geometry: null,
+              geometry: expect.anything(),
               subLevels: [{
                 id: '150820107',
                 name: 'Feros',
@@ -79,7 +79,7 @@ describe('Shapefile parser', () => {
               name: 'Calo',
               alternativeNames: ['San Xoán'],
               type: 'Parroquia',
-              geometry: null,
+              geometry: expect.anything(),
               subLevels: [{
                 id: '150820213',
                 name: 'As Galanas',
@@ -114,7 +114,7 @@ describe('Shapefile parser', () => {
               name: 'A Esperela',
               alternativeNames: ['San Pedro'],
               type: 'Parroquia',
-              geometry: null,
+              geometry: expect.anything(),
               subLevels: [{
                 id: '270040501',
                 name: 'O Cádavo',
