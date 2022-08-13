@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const {levelsIndex, levelsRepository} = require('../../../domain');
-const {levelTypeToString} = require('../../../domain/admin-levels');
+const {levelTypeToString, AdminLevel, LevelTypes} = require('../../../domain/admin-levels');
 
 router.get('/comarcas', (req, res) => {
   const comarcas = levelsIndex.findAllComarcas();
@@ -21,10 +21,14 @@ router.get('/divisions/:ineCode', (req, res) => {
   res.send(mapLevelSubTreeToDao(level));
 });
 
-router.get('/divisions/:ineCode/comarcas', (req, res) => {
-  const province = levelsIndex.findByIneCode(req.params.ineCode);
+router.get('/divisions/:ineCode/:division', (req, res) => {
+  const level = levelsIndex.findByIneCode(req.params.ineCode);
 
-  res.send(mapSubLevelsToDao(province));
+  if (level.type === LevelTypes.Provincia && req.params.division === 'comarcas') {
+    res.send(mapSubLevelsToDao(level));
+  }
+
+  res.send(mapSubLevelsToDao(level));
 });
 
 router.get('/provincias', (req, res) => {
