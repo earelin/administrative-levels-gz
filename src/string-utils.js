@@ -1,4 +1,4 @@
-i mport _ from 'lodash';
+const _ = require('lodash');
 
 function capitalizeWords(string) {
   return string.toLocaleLowerCase()
@@ -74,8 +74,6 @@ function convertRegexResultToComponents(componentsStrings, input) {
 
   return components;
 }
-
-
 
 module.exports = {
   capitalizeWords,

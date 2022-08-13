@@ -1,7 +1,7 @@
-import csvParser from 'csv-parser';
-import {AdminLevel, AdminLevelAggregator} from '../../../domain/admin-levels';
-import fs from 'fs';
-import {capitalizeWords, undoCommaSplit} from '../../../string-utils';
+const csvParser = require('csv-parser');
+const {AdminLevel, AdminLevelAggregator} = require('../../../domain/admin-levels');
+const fs = require('fs');
+const {capitalizeWords, undoCommaSplit} = require('../../../string-utils');
 
 async function nomenclatorParse(file) {
   const divisions = new AdminLevelAggregator();
@@ -33,4 +33,4 @@ function parsePlaceName(string) {
   return  undoCommaSplit(capitalizeWords(string));
 }
 
-export default nomenclatorParse;
+module.exports = nomenclatorParse;

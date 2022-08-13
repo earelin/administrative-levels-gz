@@ -1,4 +1,4 @@
-import nomenclatorParser from './parser';
+const nomenclatorParser = require('./parser');
 
 const fileName = process.argv[2];
 
