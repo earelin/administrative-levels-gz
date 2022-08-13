@@ -1,11 +1,11 @@
-const {AdminLevel, AdminLevelAggregator, LevelTypes} = require('../../../domain/admin-levels');
+const {AdminDivision, AdminDivisionsAggregator, AdminDivisionTypes} = require('../../../domain/admin-levels');
 const shapefile = require('shapefile');
 const {extractIneCodeComponents} = require('../../../string-utils');
 
 async function shapefilesParser(parroquiasShapefilePath, poboacionsShapefilePath) {
   const poboacions = await processPoboacionsShapefile(poboacionsShapefilePath);
 
-  const adminLevels = new AdminLevelAggregator();
+  const adminLevels = new AdminDivisionsAggregator();
   await processParroquiasShapefile(poboacions, parroquiasShapefilePath, adminLevels);
 
   return adminLevels;
@@ -24,22 +24,22 @@ async function processParroquiasShapefile(poboacions, shapefilePath, adminLevels
         adminLevels,
         properties.CodPROV,
         properties.Provincia,
-        LevelTypes.Provincia);
+        AdminDivisionTypes.Provincia);
       const comarca = addLevelToParent(
         province,
         properties.CodCOM,
         properties.Comarca,
-        LevelTypes.Comarca);
+        AdminDivisionTypes.Comarca);
       const concello = addLevelToParent(
         comarca,
         properties.CodCONC,
         properties.Concello,
-        LevelTypes.Concello);
+        AdminDivisionTypes.Concello);
       const parroquia = addLevelToParent(
         concello,
         properties.CodPARRO,
         properties.Parroquia,
-        LevelTypes.Parroquia);
+        AdminDivisionTypes.Parroquia);
 
       poboacions.get(parroquia.id)
         ?.forEach(poboacion => parroquia.addSubLevel(poboacion));
@@ -60,10 +60,10 @@ async function processPoboacionsShapefile(shapefilePath) {
       const poboacionTree = extractIneCodeComponents(properties.COD_INE9);
       const {sanitizedName, alternativeNames} = sanitizeName(properties.NOME10);
 
-      const poboacion = new AdminLevel(
+      const poboacion = new AdminDivision(
         properties.COD_INE9,
         sanitizedName,
-        LevelTypes.Poboacion,
+        AdminDivisionTypes.Poboacion,
         alternativeNames);
 
       if (parroquiasPoboacions.has(poboacionTree.parroquia)) {
@@ -81,7 +81,7 @@ async function processPoboacionsShapefile(shapefilePath) {
 function addLevelToParent(parent, id, name, type, geometry = null) {
   const {sanitizedName, alternativeNames} = sanitizeName(name);
 
-  let level = new AdminLevel(String(id), sanitizedName, type, alternativeNames, geometry);
+  let level = new AdminDivision(String(id), sanitizedName, type, alternativeNames, geometry);
   if (parent.hasSubLevel(level)) {
     level = parent.findSubLevelById(level.id);
   } else {

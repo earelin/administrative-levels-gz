@@ -1,11 +1,11 @@
-const {AdminLevel, LevelTypes} = require('../domain/admin-levels');
+const {AdminDivision, AdminDivisionTypes} = require('../domain/admin-levels');
 
 class LevelsRepository {
 
   constructor(levelsDao) {
     this.levels = new Map();
     for (const levelDao of levelsDao) {
-      this.levels.set(levelDao.id, AdminLevel.from(levelDao, LevelTypes.Provincia));
+      this.levels.set(levelDao.id, AdminDivision.from(levelDao, AdminDivisionTypes.Provincia));
     }
   }
 

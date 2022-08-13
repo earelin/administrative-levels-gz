@@ -1,10 +1,10 @@
 const csvParser = require('csv-parser');
-const {AdminLevel, AdminLevelAggregator} = require('../../../domain/admin-levels');
+const {AdminDivision, AdminDivisionsAggregator} = require('../../../domain/admin-levels');
 const fs = require('fs');
 const {capitalizeWords, undoCommaSplit} = require('../../../string-utils');
 
 async function nomenclatorParse(file) {
-  const divisions = new AdminLevelAggregator();
+  const divisions = new AdminDivisionsAggregator();
 
   const csvReader = fs.createReadStream(file)
     .pipe(csvParser({separator: ';'}));
@@ -20,7 +20,7 @@ async function nomenclatorParse(file) {
 }
 
 function addLevelToParent(parent, id, name) {
-  let level = new AdminLevel(id, parsePlaceName(name));
+  let level = new AdminDivision(id, parsePlaceName(name));
   if (parent.hasSubLevel(level)) {
     level = parent.findSubLevelById(level.id);
   } else {

@@ -1,16 +1,16 @@
 const LevelsIndex = require('../../src/infrastructure/levels-index');
-const {LevelTypes, AdminLevel} = require('../../src/domain/admin-levels');
+const {AdminDivisionTypes, AdminDivision} = require('../../src/domain/admin-levels');
 
 describe('Levels indexes', () => {
 
-  const CORUNA = new AdminLevel('15', 'A Coruña', LevelTypes.Provincia);
-  const SANTIAGO = new AdminLevel('15', 'Santiago', LevelTypes.Comarca);
+  const CORUNA = new AdminDivision('15', 'A Coruña', AdminDivisionTypes.Provincia);
+  const SANTIAGO = new AdminDivision('15', 'Santiago', AdminDivisionTypes.Comarca);
   CORUNA.addSubLevel(SANTIAGO)
 
-  const TEO = new AdminLevel('15082', 'Teo', LevelTypes.Concello);
+  const TEO = new AdminDivision('15082', 'Teo', AdminDivisionTypes.Concello);
   SANTIAGO.addSubLevel(TEO);
 
-  const LUGO = new AdminLevel('27', 'Lugo', LevelTypes.Provincia);
+  const LUGO = new AdminDivision('27', 'Lugo', AdminDivisionTypes.Provincia);
 
   const LEVELS = [CORUNA, LUGO];
 

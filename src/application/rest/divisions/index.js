@@ -1,14 +1,14 @@
 const express = require('express');
 const {levelsIndex, levelsRepository, divisionsService} = require('../../../domain');
-const {levelTypeToString, LevelTypes} = require('../../../domain/admin-levels');
+const {levelTypeToString, AdminDivisionTypes} = require('../../../domain/admin-levels');
 
 const router = express.Router();
 
 const divisionToEnum = {
-  comarcas: LevelTypes.Comarca,
-  concellos: LevelTypes.Concello,
-  parroquias: LevelTypes.Parroquia,
-  poboacions: LevelTypes.Poboacion
+  comarcas: AdminDivisionTypes.Comarca,
+  concellos: AdminDivisionTypes.Concello,
+  parroquias: AdminDivisionTypes.Parroquia,
+  poboacions: AdminDivisionTypes.Poboacion
 }
 
 router.get('/comarcas/:comarca', (req, res) => {

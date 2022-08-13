@@ -1,4 +1,4 @@
-const {LevelTypes} = require('../domain/admin-levels');
+const {AdminDivisionTypes} = require('../domain/admin-levels');
 
 class LevelsIndex {
   constructor(repository) {
@@ -23,7 +23,7 @@ class LevelsIndex {
 
 function indexTree(index, comarcasIndex, tree) {
   for (let level of tree) {
-    if (level.type !== LevelTypes.Comarca) {
+    if (level.type !== AdminDivisionTypes.Comarca) {
       index.set(level.id, level);
     } else {
       comarcasIndex.set(level.id, level);

@@ -1,4 +1,4 @@
-class AdminLevelAggregator {
+class AdminDivisionsAggregator {
   constructor() {
     this.subLevels = new Map();
   }
@@ -27,17 +27,17 @@ class AdminLevelAggregator {
   }
 }
 
-class AdminLevel extends AdminLevelAggregator {
-  static from(rawLevel, type = LevelTypes.Unknown) {
-    const adminLevel = new AdminLevel(rawLevel.id, rawLevel.name, type, rawLevel.alternativeNames, rawLevel.geometry);
+class AdminDivision extends AdminDivisionsAggregator {
+  static from(rawLevel, type = AdminDivisionTypes.Unknown) {
+    const adminLevel = new AdminDivision(rawLevel.id, rawLevel.name, type, rawLevel.alternativeNames, rawLevel.geometry);
     const lowerLevel = lowerLevelOf(type);
     rawLevel.subLevels
-      ?.map(subLevel => AdminLevel.from(subLevel, lowerLevel))
+      ?.map(subLevel => AdminDivision.from(subLevel, lowerLevel))
       .forEach(subLevel => adminLevel.addSubLevel(subLevel));
     return adminLevel;
   }
 
-  constructor(id, name, type = LevelTypes.Unknown, alternativeNames = []) {
+  constructor(id, name, type = AdminDivisionTypes.Unknown, alternativeNames = []) {
     super();
     this.id = id;
     this.name = name;
@@ -61,7 +61,7 @@ class AdminLevel extends AdminLevelAggregator {
 
 }
 
-const LevelTypes = Object.freeze({
+const AdminDivisionTypes = Object.freeze({
   Provincia: Symbol("provincia"),
   Comarca: Symbol("comarca"),
   Concello: Symbol("concello"),
@@ -70,7 +70,7 @@ const LevelTypes = Object.freeze({
   Unknown: Symbol("unknown")
 });
 
-const levelTypesOrder = [LevelTypes.Provincia, LevelTypes.Comarca, LevelTypes.Concello, LevelTypes.Parroquia, LevelTypes.Poboacion];
+const levelTypesOrder = [AdminDivisionTypes.Provincia, AdminDivisionTypes.Comarca, AdminDivisionTypes.Concello, AdminDivisionTypes.Parroquia, AdminDivisionTypes.Poboacion];
 
 function lowerLevelOf(parent) {
   const parentTypeIndex = levelTypesOrder.indexOf(parent);
@@ -88,21 +88,21 @@ function isLowerLevelOf(parentLevelType, levelType) {
 }
 
 const levelTypeStringMapping = new Map();
-levelTypeStringMapping.set(LevelTypes.Provincia, "Provincia");
-levelTypeStringMapping.set(LevelTypes.Comarca, "Comarca");
-levelTypeStringMapping.set(LevelTypes.Concello, "Concello");
-levelTypeStringMapping.set(LevelTypes.Parroquia, "Parroquia");
-levelTypeStringMapping.set(LevelTypes.Poboacion, "Poboacion");
-levelTypeStringMapping.set(LevelTypes.Unknown, "Unknown");
+levelTypeStringMapping.set(AdminDivisionTypes.Provincia, "Provincia");
+levelTypeStringMapping.set(AdminDivisionTypes.Comarca, "Comarca");
+levelTypeStringMapping.set(AdminDivisionTypes.Concello, "Concello");
+levelTypeStringMapping.set(AdminDivisionTypes.Parroquia, "Parroquia");
+levelTypeStringMapping.set(AdminDivisionTypes.Poboacion, "Poboacion");
+levelTypeStringMapping.set(AdminDivisionTypes.Unknown, "Unknown");
 
 function levelTypeToString(levelType) {
   return levelTypeStringMapping.get(levelType);
 }
 
 module.exports = {
-  AdminLevelAggregator,
-  AdminLevel,
-  LevelTypes,
+  AdminDivisionsAggregator,
+  AdminDivision,
+  AdminDivisionTypes,
   lowerLevelOf,
   levelTypeToString,
   isLowerLevelOf
