@@ -36,6 +36,13 @@ router.get('/divisions/:ineCode/:division', (req, res) => {
   res.send(mapLevelsToDao(subDivisions));
 });
 
+router.get('/divisions/:ineCode/:division/geometry', (req, res) => {
+  const subDivisionType = divisionToEnum[req.params.division];
+  const subDivisions = divisionsService.findSubdivisionsOf(req.params.ineCode, subDivisionType);
+
+  res.send(adaptLevelsArrayToGeometryDao(subDivisions));
+});
+
 router.get('/divisions/:ineCode', (req, res) => {
   const level = levelsIndex.findByIneCode(req.params.ineCode);
 
@@ -44,6 +51,10 @@ router.get('/divisions/:ineCode', (req, res) => {
 
 router.get('/provincias', (req, res) => {
   res.send(mapLevelsToDao(levelsRepository.findAll()));
+});
+
+router.get('/provincias/geometry', (req, res) => {
+  res.send(adaptLevelsArrayToGeometryDao(levelsRepository.findAll()));
 });
 
 function mapLevelToDao(level) {
@@ -72,9 +83,17 @@ function adaptLevelToGeometryDao(level) {
     properties: {
       id: level.id,
       name: level.name,
-      alternativeNames: Array.from(level.alternativeNames)
+      alternativeNames: Array.from(level.alternativeNames),
+      type: levelTypeToString(level.type)
     }
-  }
+  };
+}
+
+function adaptLevelsArrayToGeometryDao(levels) {
+  return {
+    type: 'FeatureCollection',
+    features: levels.map(level => adaptLevelToGeometryDao(level))
+  };
 }
 
 module.exports = router;

@@ -164,8 +164,39 @@ describe('Divisions endoints', () => {
         properties: {
           id: '15',
           name: 'A Coruña',
-          alternativeNames: []
+          alternativeNames: [],
+          type: 'Provincia'
         }
+      });
+  });
+
+  it('Should return concellos of a province geometries', async () => {
+    const response = await request.get('/divisions/15/concellos/geometry');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual({
+        type: 'FeatureCollection',
+        features: [{
+          type: 'Feature',
+          geometry: expect.anything(),
+          properties: {
+            id: '15008',
+            name: 'Bergondo',
+            alternativeNames: [],
+            type: 'Concello'
+          }
+        }, {
+          type: 'Feature',
+          geometry: expect.anything(),
+          properties: {
+            id: '15082',
+            name: 'Teo',
+            alternativeNames: [],
+            type: 'Concello'
+          }
+        }]
       });
   });
 });
