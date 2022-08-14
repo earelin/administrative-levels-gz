@@ -20,13 +20,13 @@ router.get('/comarcas/:comarca', (req, res) => {
 router.get('/comarcas', (req, res) => {
   const comarcas = divisionsService.findAllDivisionsOfType(AdminDivisionTypes.Comarca);
 
-  res.send(comarcas.map(comarca => mapLevelToDao(comarca)));
+  res.send(mapLevelsToDao(comarcas));
 });
 
 router.get('/concellos', (req, res) => {
   const concellos = divisionsService.findAllDivisionsOfType(AdminDivisionTypes.Concello);
 
-  res.send(concellos.map(concello => mapLevelToDao(concello)));
+  res.send(mapLevelsToDao(concellos));
 });
 
 router.get('/divisions/:ineCode/geometry', (req, res) => {
@@ -79,7 +79,9 @@ function mapLevelSubTreeToDao(level) {
 }
 
 function mapLevelsToDao(levels) {
-  return levels.map(level => mapLevelToDao(level));
+  return levels
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .map(level => mapLevelToDao(level));
 }
 
 function adaptLevelToGeometryDao(level) {

@@ -46,13 +46,13 @@ describe('Divisions endoints', () => {
         alternativeNames: [],
         type: 'Comarca'
       }, {
-        id: '15',
-        name: 'Santiago',
+        id: '19',
+        name: 'A Fonsagrada',
         alternativeNames: [],
         type: 'Comarca'
       }, {
-        id: '19',
-        name: 'A Fonsagrada',
+        id: '15',
+        name: 'Santiago',
         alternativeNames: [],
         type: 'Comarca'
       }]);
@@ -79,6 +79,11 @@ describe('Divisions endoints', () => {
       .toBe(200);
     expect(response.body)
       .toEqual([{
+        id: '27004',
+        name: 'Baleira',
+        alternativeNames: [],
+        type: 'Concello'
+      }, {
         id: '15008',
         name: 'Bergondo',
         alternativeNames: [],
@@ -86,11 +91,6 @@ describe('Divisions endoints', () => {
       }, {
         id: '15082',
         name: 'Teo',
-        alternativeNames: [],
-        type: 'Concello'
-      }, {
-        id: '27004',
-        name: 'Baleira',
         alternativeNames: [],
         type: 'Concello'
       }]);
