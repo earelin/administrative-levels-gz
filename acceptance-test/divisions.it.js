@@ -72,6 +72,30 @@ describe('Divisions endoints', () => {
       });
   });
 
+  it('Should return all concellos', async () => {
+    const response = await request.get('/concellos');
+
+    expect(response.statusCode)
+      .toBe(200);
+    expect(response.body)
+      .toEqual([{
+        id: '15008',
+        name: 'Bergondo',
+        alternativeNames: [],
+        type: 'Concello'
+      }, {
+        id: '15082',
+        name: 'Teo',
+        alternativeNames: [],
+        type: 'Concello'
+      }, {
+        id: '27004',
+        name: 'Baleira',
+        alternativeNames: [],
+        type: 'Concello'
+      }]);
+  });
+
   it('Should return concello data', async () => {
     const response = await request.get('/divisions/15008');
 

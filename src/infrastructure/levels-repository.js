@@ -9,17 +9,10 @@ class LevelsRepository {
     }
   }
 
-  static convertArraysToMap() {
-
-  }
-
   findAll() {
     return Array.from(this.levels.values());
   }
 
-  findById(id) {
-    return this.levels.get(id);
-  }
 }
 
 module.exports = LevelsRepository;

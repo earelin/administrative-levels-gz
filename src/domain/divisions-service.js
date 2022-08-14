@@ -1,18 +1,28 @@
-const {isLowerLevelOf} = require('./admin-levels');
+const {isLowerLevelOf, AdminDivisionTypes} = require('./admin-levels');
 
 class DivisionsService {
-  constructor(levelsIndex) {
+  constructor(levelsIndex, levelsRepository) {
     this.levelsIndex = levelsIndex;
+    this.levelsRepository = levelsRepository;
+  }
+
+  findAllDivisionsOfType(divisionType) {
+    return this.levelsRepository.findAll()
+      .flatMap(province => this.findSubdivisionsFromReference(province, AdminDivisionTypes.Concello));
+  }
+
+  findSubdivisionsFromReference(parent, divisionType) {
+    if (isLowerLevelOf(parent.type, divisionType)) {
+      return getSubLevelsOf(parent, divisionType);
+    }
+
+    return null;
   }
 
   findSubdivisionsOf(divisionId, subdivisionType) {
     const division = this.levelsIndex.findByIneCode(divisionId);
 
-    if (isLowerLevelOf(division.type, subdivisionType)) {
-      return getSubLevelsOf(division, subdivisionType);
-    }
-
-    return null;
+    return this.findSubdivisionsFromReference(division, subdivisionType);
   }
 }
 

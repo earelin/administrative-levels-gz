@@ -23,6 +23,12 @@ router.get('/comarcas', (req, res) => {
   res.send(comarcas.map(comarca => mapLevelToDao(comarca)));
 });
 
+router.get('/concellos', (req, res) => {
+  const concellos = divisionsService.findAllDivisionsOfType(AdminDivisionTypes.Concello);
+
+  res.send(concellos.map(concello => mapLevelToDao(concello)));
+});
+
 router.get('/divisions/:ineCode/geometry', (req, res) => {
   const level = levelsIndex.findByIneCode(req.params.ineCode);
 
