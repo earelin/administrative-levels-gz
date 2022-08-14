@@ -1,6 +1,6 @@
 openapi: 3.0.3
 info:
-  title: Limites Administrativos de Galiza
+  title: Divisións Administrativas de Galiza
   description: Galiza Admin Boundaries
   version: 1.0.0
 
@@ -33,13 +33,62 @@ paths:
           description: Código de comarca
       responses:
         '200':
-          description: Array con todas as comarcas
+          description: Información dunha comarca
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/AdminDivision'
 
+  /comarcas/{idComarca}/geometry:
+    get:
+      summary: Obter a información xeogrǽfica dunha comarca.
+      parameters:
+        - in: path
+          name: idComarca
+          schema:
+            type: integer
+          required: true
+          description: Código de comarca
+      responses:
+        '200':
+          description: GeoJSON Feature
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeoJsonFeature'
+
+  /concellos:
+    get:
+      summary: Todos os concellos
+      responses:
+        '200':
+          description: Concellos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AdminDivision'
+
   /divisions/{ineCode}:
+    get:
+      summary: Obter unha division administrativa por código INE
+      parameters:
+        - in: path
+          name: ineCode
+          schema:
+            type: integer
+          required: true
+          description: Código INE
+      responses:
+        '200':
+          description: Administrative division
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AdminDivision'
+
+  /divisions/{ineCode}/geometry:
     get:
       summary: Obter unha division administrativa por código INE
       parameters:
@@ -71,7 +120,7 @@ paths:
           name: subDivision
           schema:
             type: string
-            enum: [comarcas, concellos, parroquias, poboacions]
+            enum: [ comarcas, concellos, parroquias, poboacions ]
           required: true
           description: Subdivision administrativa
       responses:
@@ -83,6 +132,31 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/AdminDivision'
+
+  /divisions/{ineCode}/{subDivision}/geometry:
+    get:
+      summary: Obter as xeometrías das subdivision administrativa
+      parameters:
+        - in: path
+          name: ineCode
+          schema:
+            type: integer
+          required: true
+          description: Código INE
+        - in: path
+          name: subDivision
+          schema:
+            type: string
+            enum: [ comarcas, concellos, parroquias, poboacions ]
+          required: true
+          description: Subdivision administrativa
+      responses:
+        '200':
+          description: Feature collection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeoJsonFeatureCollection'
 
   /provincias:
     get:
@@ -108,3 +182,28 @@ components:
           type: string
         type:
           type: string
+
+    GeoJsonFeatureCollection:
+      type: object
+      properties:
+        type:
+          type: string
+          default: 'FeatureCollection'
+        features:
+          type: array
+          items:
+            $ref: '#/components/schemas/GeoJsonFeature'
+
+    GeoJsonFeature:
+      type: object
+      properties:
+        type:
+          type: string
+          default: 'Feature'
+        geometry:
+          type: object
+          properties:
+            type:
+              type: string
+            coordinates:
+              type: array
