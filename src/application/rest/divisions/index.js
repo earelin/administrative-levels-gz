@@ -18,7 +18,7 @@ router.get('/comarcas/:comarca', (req, res) => {
 });
 
 router.get('/comarcas', (req, res) => {
-  const comarcas = levelsIndex.findAllComarcas();
+  const comarcas = divisionsService.findAllDivisionsOfType(AdminDivisionTypes.Comarca);
 
   res.send(comarcas.map(comarca => mapLevelToDao(comarca)));
 });

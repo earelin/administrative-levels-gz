@@ -1,4 +1,4 @@
-const {isLowerLevelOf, AdminDivisionTypes} = require('./admin-levels');
+const {isLowerLevelOf} = require('./admin-levels');
 
 class DivisionsService {
   constructor(levelsIndex, levelsRepository) {
@@ -8,7 +8,7 @@ class DivisionsService {
 
   findAllDivisionsOfType(divisionType) {
     return this.levelsRepository.findAll()
-      .flatMap(province => this.findSubdivisionsFromReference(province, AdminDivisionTypes.Concello));
+      .flatMap(province => this.findSubdivisionsFromReference(province, divisionType));
   }
 
   findSubdivisionsFromReference(parent, divisionType) {
